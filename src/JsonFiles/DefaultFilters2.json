@@ -1,0 +1,18 @@
+[
+    {
+        "title": "وضعیت آگهی",
+        "type": "StatusFilter",
+        "itemsList": [
+            { "title": "حذف توافقی ها", "slug": "non-negotiable", "enTitle": "negotiable" },
+            { "title": "فقط فوری ها", "slug": "urgent", "enTitle": "urgent" }
+        ]
+    },
+    {
+        "title": "امکانات تصویری آگهی",
+        "type": "StatusFilter",
+        "itemsList": [
+            { "title": "ویدیو دار", "slug": "has-video", "enTitle": "video" },
+            { "title": "عکس دار", "slug": "has-photo", "enTitle": "image2" }
+        ]
+    }
+]

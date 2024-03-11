@@ -1,0 +1,157 @@
+[
+  {
+    "id": 1,
+    "title": "آذربایجان شرقی",
+    "parent_Id" : 0
+  },
+  {
+    "id": 2,
+    "title": "آذربایجان غربی",
+    "parent_Id" : 0
+  },
+  {
+    "id": 3,
+    "title": "اردبیل",
+    "parent_Id" : 0
+  },
+  {
+    "id": 4,
+    "title": "اصفهان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 5,
+    "title": "البرز",
+    "parent_Id" : 0
+  },
+  {
+    "id": 6,
+    "title": "ایلام",
+    "parent_Id" : 0
+  },
+  {
+    "id": 7,
+    "title": "بوشهر",
+    "parent_Id" : 0
+  },
+  {
+    "id": 8,
+    "title": "تهران",
+    "parent_Id" : 0
+  },
+  {
+    "id": 9,
+    "title": "چهارمحال و بختیاری",
+    "parent_Id" : 0
+  },
+  {
+    "id": 10,
+    "title": "خراسان جنوبی",
+    "parent_Id" : 0
+  },
+  {
+    "id": 11,
+    "title": "خراسان رضوی",
+    "parent_Id" : 0
+  },
+  {
+    "id": 12,
+    "title": "خراسان شمالی",
+    "parent_Id" : 0
+  },
+  {
+    "id": 13,
+    "title": "خوزستان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 14,
+    "title": "زنجان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 15,
+    "title": "سمنان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 16,
+    "title": "سیستان و بلوچستان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 17,
+    "title": "فارس",
+    "parent_Id" : 0
+  },
+  {
+    "id": 18,
+    "title": "قزوین",
+    "parent_Id" : 0
+  },
+  {
+    "id": 19,
+    "title": "قم",
+    "parent_Id" : 0
+  },
+  {
+    "id": 20,
+    "title": "کردستان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 21,
+    "title": "کرمان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 22,
+    "title": "کرمانشاه",
+    "parent_Id" : 0
+  },
+  {
+    "id": 23,
+    "title": "کهگیلویه و بویراحمد",
+    "parent_Id" : 0
+  },
+  {
+    "id": 24,
+    "title": "گلستان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 25,
+    "title": "لرستان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 26,
+    "title": "گیلان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 27,
+    "title": "مازندران",
+    "parent_Id" : 0
+  },
+  {
+    "id": 28,
+    "title": "مرکزی",
+    "parent_Id" : 0
+  },
+  {
+    "id": 29,
+    "title": "هرمزگان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 30,
+    "title": "همدان",
+    "parent_Id" : 0
+  },
+  {
+    "id": 31,
+    "title": "یزد",
+    "parent_Id" : 0
+  }
+]

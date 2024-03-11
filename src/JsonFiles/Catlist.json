@@ -1,0 +1,162 @@
+[
+    {"id":14,"slug":"real-estate","title":"املاک","parent":0,"icon":"house-svgrepo-com (3).svg","hasChildren":true},
+    {"id":15,"slug":"vehicles","title":"وسایل نقلیه","parent":0, "icon":"car-svgrepo-com (2).svg","hasChildren":true},
+    {"id":16,"slug":"electronic-devices","title":"کالای دیجیتال","parent":0,"icon":"smartphone-svgrepo-com.svg","hasChildren":true},
+    {"id":17,"slug":"home-kitchen","title":"خانه و آشپزخانه","parent":0,"icon":"oven-svgrepo-com.svg","hasChildren":true},
+    {"id":18,"slug":"services","title":"خدمات","parent":0,"icon":"broom-svgrepo-com (1).svg","hasChildren":true},
+    {"id":19,"slug":"personal-goods","title":"وسایل شخصی","parent":0,"icon":"smartwatch-svgrepo-com.svg","hasChildren":true},
+    {"id":20,"slug":"entertainment","title":"سرگرمی و فراغت","parent":0,"icon":"train-timetable-italy-svgrepo-com.svg","hasChildren":true},
+    {"id":21,"slug":"social-services","title":"اجتماعی","parent":0,"icon":"people-multiple-svgrepo-com.svg","hasChildren":true},
+    {"id":22,"slug":"jobs","title":"استخدام و کاریابی","parent":0,"icon":"trip-suitcase-svgrepo-com.svg","hasChildren":true},
+
+    {"id":31,"slug":"buy-residential","title":"فروش مسکونی","parent":14,"icon":"","hasChildren":true},
+    {"id":32,"slug":"rent-residential","title":"اجاره مسکونی","parent":14,"icon":"","hasChildren":true},
+    {"id":33,"slug":"buy-commercial-property","title":"فروش اداری و تجاری","parent":14,"icon":"","hasChildren":false},
+    {"id":34,"slug":"rent-commercial-property","title":"اجاره اداری و تجاری","parent":14,"icon":"","hasChildren":false},
+    {"id":35,"slug":"rent-temporary","title":"اجاره کوتاه مدت","parent":14,"icon":"","hasChildren":false},
+
+    {"id":41,"slug":"buy-apartment","title":"آپارتمان","parent":31,"icon":"","hasChildren":false},
+    {"id":42,"slug":"buy-villa","title":"خانه و ویلا","parent":31,"icon":"","hasChildren":false},
+    {"id":43,"slug":"buy-old-house","title":"زمین و کلنگی","parent":31,"icon":"","hasChildren":false},
+
+    {"id":46,"slug":"rent-apartment","title":"آپارتمان","parent":32,"icon":"","hasChildren":false},
+    {"id":47,"slug":"rent-villa","title":"خانه و ویلا","parent":32,"icon":"","hasChildren":false},
+    {"id":48,"slug":"rent-old-house","title":"زمین و کلنگی","parent":32,"icon":"","hasChildren":false},
+
+    {"id":51,"slug":"auto","title":"خودرو","parent":15,"icon":"","hasChildren":true},
+    {"id":52,"slug":"motorcycles","title":"موتورسیکلت","parent":15,"icon":"","hasChildren":false},
+    {"id":53,"slug":"car-accessories","title":"قطعات یدکی و لوازم جانبی","parent":15,"icon":"","hasChildren":false},
+    {"id":54,"slug":"boat","title":"قایق و سایر وسایل نقلیه","parent":15,"icon":"","hasChildren":false},
+
+    {"id":61,"slug":"car","title":"سواری و وانت","parent":51,"icon":"","hasChildren":false},
+    {"id":62,"slug":"classic-car","title":"کلاسیک","parent":51,"icon":"","hasChildren":false},
+    {"id":63,"slug":"heavy-car","title":"سنگین","parent":51,"icon":"","hasChildren":false},
+
+
+    {"id":71,"slug":"mobile-tablet","title":"موبایل و تبلت","parent":16,"icon":"","hasChildren":true},
+    {"id":72,"slug":"computers","title":"رایانه","parent":16,"icon":"","hasChildren":true},
+    {"id":73,"slug":"game-consoles","title":"کنسول، بازی ویدیویی و آنلاین","parent":16,"icon":"","hasChildren":false},
+    {"id":74,"slug":"video-audio-device","title":"صوتی و تصویری","parent":16,"icon":"","hasChildren":false},
+    {"id":75,"slug":"telephone","title":"تلفن رومیزی","parent":16,"icon":"","hasChildren":false},
+
+    {"id":81,"slug":"mobile","title":"موبایل","parent":71,"icon":"","hasChildren":false},
+    {"id":82,"slug":"tablet","title":"تبلت","parent":71,"icon":"","hasChildren":false},
+    {"id":83,"slug":"mobile-tablet-accessories","title":"لوازم جانبی","parent":71,"icon":"","hasChildren":false},
+
+
+    {"id":91,"slug":"laptop-notebook-macbook","title":"رایانه همراه","parent":72,"icon":"","hasChildren":false},
+    {"id":92,"slug":"desktop-computer","title":"رایانه رومیزی","parent":72,"icon":"","hasChildren":false},
+    {"id":93,"slug":"computer-parts-accessories","title":"قطعات و لوازم جانبی رایانه","parent":72,"icon":"","hasChildren":false},
+    {"id":94,"slug":"printer-scanner-fax","title":"پرینتر، اسکنر، کپی، فکس","parent":72,"icon":"","hasChildren":false},
+
+
+    {"id":101,"slug":"appliance","title":"لوازم خانگی برقی","parent":17,"icon":"","hasChildren":true},
+    {"id":102,"slug":"kitchen-utensils","title":"ظروف و لوازم آشپزخانه","parent":17,"icon":"","hasChildren":true},
+    {"id":103,"slug":"food-and-drink","title":"خوردنی و آشامیدنی","parent":17,"icon":"","hasChildren":false},
+    {"id":104,"slug":"furniture-wood","title":"مبلمان و وسایل چوبی","parent":17,"icon":"","hasChildren":true},
+    {"id":105,"slug":"carpet-moquette","title":"فرش، گلیم، موکت","parent":17,"icon":"","hasChildren":true},
+    {"id":106,"slug":"decoration","title":"لوازم دکوری و تزئینی","parent":17,"icon":"","hasChildren":true},
+    {"id":107,"slug":"sleep-goods","title":"تشک، روتختی، تخت خواب","parent":17,"icon":"","hasChildren":true},
+    {"id":108,"slug":"home-lighting","title":"وسایل روشنایی","parent":17,"icon":"","hasChildren":true},
+
+
+    {"id":111,"slug":"refrigerator-freezer","title":"یخچال و فریزر","parent":101,"icon":"","hasChildren":false},
+    {"id":112,"slug":"water-cooler-refinery","title":"آب سردکن و تصفیه آب","parent":101,"icon":"","hasChildren":false},
+    {"id":113,"slug":"washing-machines","title":"ماشین لباسشویی و خشک کن لباس","parent":101,"icon":"","hasChildren":false},
+    {"id":114,"slug":"dishwasher","title":"ماشین ظرفشویی","parent":101,"icon":"","hasChildren":false},
+    {"id":115,"slug":"vacuums-cleaner","title":"جاروبرقی، جاروشارژی و بخارشو","parent":101,"icon":"","hasChildren":false},
+    {"id":116,"slug":"steam-iron","title":"اتو و لوازم اتو","parent":101,"icon":"","hasChildren":false},
+    {"id":117,"slug":"juicers","title":"آبمیوه و آب مرکبات گیر","parent":101,"icon":"","hasChildren":false},
+    {"id":118,"slug":"food-mill","title":"خرد کن، آسیاب و غذاساز","parent":101,"icon":"","hasChildren":false},
+    {"id":119,"slug":"oven-baking-appliances","title":"اجاق گاز و لوازم برقی پخت و پز","parent":101,"icon":"","hasChildren":false},
+    {"id":120,"slug":"range-hood","title":"هود","parent":101,"icon":"","hasChildren":false},
+
+
+    {"id":131,"slug":"pot-kettle","title":"قوری، کتری و قهوه ساز دستی","parent":102,"icon":"","hasChildren":false},
+    {"id":132,"slug":"cooking-utensils","title":"ظروف پخت و پز","parent":102,"icon":"","hasChildren":false},
+
+
+    {"id":141,"slug":"furniture","title":"مبلمان خانگی و میزعسلی","parent":104,"icon":"","hasChildren":false},
+    {"id":142,"slug":"shoe-rack-drawer","title":"جاکفشی، کمد و دراور","parent":104,"icon":"","hasChildren":false},
+
+
+    {"id":151,"slug":"carpet","title":"فرش","parent":105,"icon":"","hasChildren":false},
+    {"id":152,"slug":"pictorial-carpet","title":"تابلو فرش","parent":105,"icon":"","hasChildren":false},
+    {"id":153,"slug":"mat","title":"پادری","parent":105,"icon":"","hasChildren":false},
+
+
+
+    {"id":161,"slug":"mirror","title":"آینه","parent":106,"icon":"","hasChildren":false},
+    {"id":162,"slug":"wall-clock","title":"ساعت دیواری و تزئینی","parent":106,"icon":"","hasChildren":false},
+    {"id":163,"slug":"paintings-picture","title":"تابو، نقاشی و عکس","parent":106,"icon":"","hasChildren":false},
+    {"id":164,"slug":"artificial-flower","title":"گل مصنوعی","parent":106,"icon":"","hasChildren":false},
+    {"id":165,"slug":"curtains-table-cover","title":"پرده، رانر و رومیزی","parent":106,"icon":"","hasChildren":false},
+
+    
+
+    {"id":171,"slug":"bed-pillow-blanket","title":"رخت خواب، بالش و پتو","parent":107,"icon":"","hasChildren":false},
+    {"id":172,"slug":"bed-sheet","title":"سرویس روتختی","parent":107,"icon":"","hasChildren":false},
+
+
+    {"id":181,"slug":"chandeliers","title":"لوستر و چراغ آویز","parent":108,"icon":"","hasChildren":false},
+    {"id":182,"slug":"lampshade","title":"آباژور","parent":108,"icon":"","hasChildren":false},
+
+
+
+
+
+
+
+    {"id":191,"slug":"transport-logistic-services","title":"خدمات حمل و نقل","parent":18,"icon":"","hasChildren":false},
+    {"id":192,"slug":"cleaning-services","title":"خدمات نظافت","parent":18,"icon":"","hasChildren":false},
+    {"id":193,"slug":"teaching-services","title":"خدمات آموزشی","parent":18,"icon":"","hasChildren":false},
+
+
+ 
+
+
+    {"id":211,"slug":"apparel","title":"کیف، کفش و لباس","parent":19,"icon":"","hasChildren":true},
+    {"id":212,"slug":"accessories","title":"زیورآلات و اکسسوری","parent":19,"icon":"","hasChildren":true},
+    {"id":213,"slug":"beauty-and-personal-care","title":"وسایل آرایشی، بهداشتی و درمانی","parent":19,"icon":"","hasChildren":false},
+    {"id":214,"slug":"stationery","title":"لوازم التحریر","parent":19,"icon":"","hasChildren":false},
+   
+   
+    {"id":221,"slug":"bag-shoes-belt","title":"کیف، کفش و کمربند","parent":211,"icon":"","hasChildren":false},
+    {"id":222,"slug":"clothing","title":"لباس","parent":211,"icon":"","hasChildren":false},
+    
+    {"id":231,"slug":"watches","title":"ساعت","parent":212,"icon":"","hasChildren":false},
+    {"id":232,"slug":"jewellery","title":"جواهرات","parent":212,"icon":"","hasChildren":false},
+    {"id":233,"slug":"trinket","title":"بدلیات","parent":212,"icon":"","hasChildren":false},
+
+
+    {"id":241,"slug":"ticket","title":"بلیط","parent":20,"icon":"","hasChildren":true},
+    {"id":242,"slug":"tours","title":"تور و چارتر","parent":20,"icon":"","hasChildren":false},
+    {"id":243,"slug":"publication","title":"کتاب و مجله","parent":20,"icon":"","hasChildren":true},
+    {"id":244,"slug":"bike-skate-scooter","title":"دوچرخه، اسکیت و اسکوتر","parent":20,"icon":"","hasChildren":false},
+    {"id":245,"slug":"musical-instruments","title":"آلات موسیقی","parent":20,"icon":"","hasChildren":false},
+
+
+    {"id":251,"slug":"concert-ticket","title":"بلیط کنسرت","parent":241,"icon":"","hasChildren":false},
+    {"id":252,"slug":"theatre-cinema-ticket","title":"بلیط تئاتر و سینما","parent":241,"icon":"","hasChildren":false},
+    {"id":253,"slug":"sport-ticket","title":"بلیط ورزشی","parent":241,"icon":"","hasChildren":false},
+    {"id":254,"slug":"discount-gift-card","title":"کارت هدیه و تخفیف","parent":241,"icon":"","hasChildren":false},
+
+
+    {"id":261,"slug":"educational-book","title":"کتاب و مجله آموزشی","parent":243,"icon":"","hasChildren":false},
+    {"id":262,"slug":"historical-book","title":"کتاب و مجله تاریخی","parent":243,"icon":"","hasChildren":false},
+    {"id":263,"slug":"literary-book","title":"کتاب و مجله ادبی","parent":243,"icon":"","hasChildren":false},
+    {"id":264,"slug":"magazine","title":"مجلات","parent":243,"icon":"","hasChildren":false},
+
+    {"id":271,"slug":"event","title":"رویداد","parent":21,"icon":"","hasChildren":false},
+    {"id":272,"slug":"voluntary","title":"فعالیت داوطلبانه","parent":21,"icon":"","hasChildren":false},
+
+
+    {"id":291,"slug":"administrative-jobs","title":"استخدام اداری و مدیریت","parent":22,"icon":"","hasChildren":false},
+    {"id":292,"slug":"finance-legal-jobs","title":"استخدام مالی و حسابداری","parent":22,"icon":"","hasChildren":false},
+    {"id":293,"slug":"marketing-jobs","title":"استخدام بازاریابی و فروش","parent":22,"icon":"","hasChildren":false},
+    {"id":294,"slug":"service-jobs","title":"استخدام خدمات فروشگاه و رستوران","parent":22,"icon":"","hasChildren":false},
+    {"id":295,"slug":"transport-delivery-jobs","title":"استخدام حمل و نقل","parent":22,"icon":"","hasChildren":false},
+    {"id":296,"slug":"janitorial-jobs","title":"استخدام سرایداری و نظافت","parent":22,"icon":"","hasChildren":false},
+    {"id":297,"slug":"art-media-jobs","title":"استخدام هنری و رسانه","parent":22,"icon":"","hasChildren":false}
+
+]

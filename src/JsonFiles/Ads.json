@@ -1,0 +1,199 @@
+[
+    {
+        "id": 4,
+        "code":"AZ87WWpu",
+        "title": "۱۵۲ متر 2 خوابه داخل شهرک",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "152000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "16000000"
+            }
+        ],
+        "imgThumb": "web11.jpg"
+    },
+    {
+        "id": 5,
+        "code":"AZ87WEx1",
+        "title": "۱۲۰ متر ۲خواب استاندارد لوکیشن اعیان نشین",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "600000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "18000000"
+            }
+        ],
+        "imgThumb": "web22.webp"
+    },
+    {
+        "id": 6,
+        "code":"AZ8X2HAw",
+        "title": "پژو۲۰۶ تیپ ۵ بدون رنگ معاوضه",
+        "cat_id": 61,
+        "cat_title": "سواری و وانت",
+        "description": "",
+        "features": [
+            {
+                "title": "قیمت",
+                "value": "۳۸۵۰۰۰۰۰۰"
+            }
+        ],
+        "imgThumb": "web33.webp"
+    },
+    {
+        "id": 7,
+        "code":"AZ8HHYOz",
+        "title": "176 متر آپارتمان نوساز",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "138000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "12000000"
+            }
+        ],
+        "imgThumb": "web44.webp"
+    },
+    {
+        "id": 8,
+        "code":"AZ87WWpu",
+        "title": "۱۵۲ متر 2 خوابه داخل شهرک",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "152000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "16000000"
+            }
+        ],
+        "imgThumb": "web97.webp"
+    },
+    {
+        "id": 9,
+        "code":"AZ87WEx1",
+        "title": "۱۲۰ متر ۲خواب استاندارد لوکیشن اعیان نشین",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "600000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "18000000"
+            }
+        ],
+        "imgThumb": "web55.webp"
+    },
+    {
+        "id": 10,
+        "code":"AZ8X2HAw",
+        "title": "پژو۲۰۶ تیپ ۵ بدون رنگ معاوضه",
+        "cat_id": 61,
+        "cat_title": "سواری و وانت",
+        "description": "",
+        "features": [
+            {
+                "title": "قیمت",
+                "value": "۳۸۵۰۰۰۰۰۰"
+            }
+        ],
+        "imgThumb": "web66.webp"
+    },
+    {
+        "id": 11,
+        "code":"AZ8HHYOz",
+        "title": "176 متر آپارتمان نوساز",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "138000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "12000000"
+            }
+        ],
+        "imgThumb": "web77.webp"
+    },
+    {
+        "id": 12,
+        "code":"AZ87WEx1",
+        "title": "۱۲۰ متر ۲خواب استاندارد لوکیشن اعیان نشین",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "600000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "18000000"
+            }
+        ],
+        "imgThumb": "web88.webp"
+    },
+    {
+        "id": 13,
+        "code":"AZ8X2HAw",
+        "title": "پژو۲۰۶ تیپ ۵ بدون رنگ معاوضه",
+        "cat_id": 61,
+        "cat_title": "سواری و وانت",
+        "description": "",
+        "features": [
+            {
+                "title": "قیمت",
+                "value": "۳۸۵۰۰۰۰۰۰"
+            }
+        ],
+        "imgThumb": "web99.webp"
+    },
+    {
+        "id": 14,
+        "code":"AZ8HHYOz",
+        "title": "176 متر آپارتمان نوساز",
+        "cat_id": 46,
+        "cat_title": "اجاره آپارتمان",
+        "description": "",
+        "features": [
+            {
+                "title": "ودیعه",
+                "value": "138000000"
+            },
+            {
+                "title": "اجاره",
+                "value": "12000000"
+            }
+        ],
+        "imgThumb": "web98.webp"
+    }
+]
