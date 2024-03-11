@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { FaArrowRightLong } from "react-icons/fa6";
 import { FiChevronLeft } from "react-icons/fi";
 import { IoIosClose } from "react-icons/io";
 import {
@@ -15,16 +15,23 @@ import {
 import provinces from "./provinces.json"
 import cities from "./cities.json"
 
-import { useParams ,useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import URLMaker from '../../helper/URLMaker';
 import { useStateContext } from '../../context/SiteContext';
 
 
 const CityModal = (props) => {
 
+    const { currentCity } = useStateContext()
+
+    console.log(currentCity);
+
     const [provinceList] = useState([...provinces])
     const [cityList, setCityList] = useState([])
     const [selectedCities, setSelectedCities] = useState({ list: [], ids: [] })
+
+    console.log(selectedCities.ids);
+
     const navigate = useNavigate()
     const getCities = (parent) => {
         let citiesList = cities.filter((city) => {
@@ -33,8 +40,16 @@ const CityModal = (props) => {
         setCityList(citiesList)
     }
 
+    useEffect(() => {
+        setSelectedCities({
+            ids: [...currentCity.idsArray],
+            list: [...currentCity.citiesList]
+        })
+    }, [currentCity])
+
+
     // const { cat } = useParams()
-    const {currentCat} = useStateContext()
+    const { currentCat } = useStateContext()
     // let catName = cat != undefined ? cat : ""
     const checkCity = (id, title = "", slug = "") => {
 
@@ -78,8 +93,12 @@ const CityModal = (props) => {
         }
     }
 
+    const backToProvinces = () => {
+        setCityList([])
+    }
+
     const navToNewCities = () => {
-        
+
         let multiCity = selectedCities.ids.length > 1 ? true : false
         let citySlug = ''
         let filters = {}
@@ -106,11 +125,11 @@ const CityModal = (props) => {
         urlArray = urlArray.filter((seg) => seg !== '')
         urlArray = urlArray.join('/')
 
-        console.log(urlArray+filtersString);
+        console.log(urlArray + filtersString);
 
         props.close()
 
-        navigate(urlArray+filtersString)
+        navigate(urlArray + filtersString)
     }
 
     return (
@@ -151,21 +170,24 @@ const CityModal = (props) => {
 
 
 
-                    {/* <span className='p-2 bg-red-100 gap-2 flex items-center justify-center rounded-lg'>
-                        <p className='text-red-900' >شیراز</p>
-                        <span className='w-5 h-5 flex  justify-center items-center  rounded-full transition hover:bg-brown-100 cursor-pointer'>
-                            <IoIosClose className='text-red-900 text-lg' />
-                        </span>
-                    </span> */}
-
                 </div>
 
 
-                <input type='text'
-                    className='p-2 px-3 border-2 border-gray-100 rounded-md focus:outline-gray-300 transition'
-                    placeholder='نام شهر را وارد کنید..'
-                    onChange={(e) => searchHandler(e.target.value)}
-                />
+
+
+                <div className='flex gap-2'>
+
+
+                    <input type='text'
+                        className='flex-grow p-2 px-3 border-2 border-gray-100 rounded-md focus:outline-gray-300 transition'
+                        placeholder='نام شهر را وارد کنید..'
+                        onChange={(e) => searchHandler(e.target.value)}
+                    />
+                </div>
+
+
+
+
             </div>
 
 
@@ -205,20 +227,25 @@ const CityModal = (props) => {
                             )
                         })
                     ) : (
-                        cityList.map((item) => {
-                            return (
+                        <>
+                            {/* <ListItem>بازگشت</ListItem> */}
+                            {
+                                cityList.map((item) => {
+                                    return (
 
-                                <ListItem className="flex py-0 justify-between items-center"
-                                    onClick={(e) => checkCity(item.id, item.title, item.slug)}
-                                >
-                                    <p>{item.title}</p>
-                                    
-                                    <Checkbox color="pink" checked={selectedCities.ids.includes(item.id) ? true : false}
-                                        onChange={(e) => ({})}
-                                    />
-                                </ListItem>
-                            )
-                        })
+                                        <ListItem className="flex py-0 justify-between items-center"
+                                            onClick={(e) => checkCity(item.id, item.title, item.slug)}
+                                        >
+                                            <p>{item.title}</p>
+
+                                            <Checkbox color="pink" checked={selectedCities.ids.includes(item.id) ? true : false}
+                                                onChange={(e) => ({})}
+                                            />
+                                        </ListItem>
+                                    )
+                                })
+                            }
+                        </>
                     )}
 
 
@@ -230,6 +257,36 @@ const CityModal = (props) => {
 
             </DialogBody>
             <DialogFooter>
+
+                <div className='flex-grow'>
+                    {cityList.length > 0 ? (
+
+                        <Button variant="text" className="flex items-center gap-1 transition"
+                            onClick={backToProvinces}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={2}
+                                stroke="currentColor"
+                                className="h-5 w-5"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                />
+                            </svg>
+
+                            بازگشت به همه استان ها
+                        </Button>
+
+                    ) : null}
+                </div>
+
+
+
                 <Button
                     variant="text"
                     color="red"
@@ -242,6 +299,7 @@ const CityModal = (props) => {
                     variant="gradient"
                     color="green"
                     onClick={navToNewCities}
+                    disabled={currentCity.idsStr === selectedCities.ids.sort().join("") || selectedCities.ids.length === 0 ? true : false}
                 >
                     <span>تایید</span>
                 </Button>

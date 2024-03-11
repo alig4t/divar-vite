@@ -19,7 +19,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const DistrictFilter = (props) => {
 
-  console.log("DistrictFilter");
   const [queryString, setQueryString] = useSearchParams();
   const filterParam = queryString.get(props.slug)
   let prevIdsParams = ""
@@ -29,7 +28,6 @@ const DistrictFilter = (props) => {
     mahaleNumber = prevIdsParams.length
     prevIdsParams = prevIdsParams.sort().join("");
   }
-  console.log(prevIdsParams);
   const [searchVal, setSearchVal] = useState("")
   const navigate = useNavigate()
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -53,11 +51,9 @@ const DistrictFilter = (props) => {
 
 
   useEffect(() => {
-    console.log("bbbbbbbbbbbbbb");
 
     if (queryString.has(props.slug)) {
       let urlValStr = queryString.get(props.slug)
-      console.log(urlValStr);
       if (regexDistrict.test(urlValStr)) {
         let checkListArray = [];
         let ids = [];
@@ -97,7 +93,6 @@ const DistrictFilter = (props) => {
     }
 
 
-    console.log(selected);
     // { init: [], updated: { list: [], ids: [] } }
     setSelectedFilters(selected)
     // setSelectedFilters({ init: [], updated: { list: [], ids: [] } })

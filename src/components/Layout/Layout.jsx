@@ -53,6 +53,15 @@ const Layout = (props) => {
                     }
                 }
             }
+        },
+        button:{
+            styles:{
+                base:{
+                    initial:{
+                        disabled:"disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none",
+                    }
+                }
+            }
         }
     };
 
