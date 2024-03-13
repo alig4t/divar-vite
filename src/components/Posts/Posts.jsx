@@ -25,7 +25,7 @@ const Posts = () => {
         setLoading(true)
         setTimeout(() => {
             setLoading(false)
-            window.scrollTo({ top: 0, behavior: "smooth" })
+            window.scrollBy({ top: -20, behavior: "smooth" })
         }, 1000);
     }, [queryStirng,currentCat])
 

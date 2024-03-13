@@ -52,7 +52,7 @@ const PostNav = () => {
             </div>
 
 
-            <Drawer open={filterDrawer.open} onClose={handleFilterDrawer} placement='right' className="p-4">
+            <Drawer open={filterDrawer.open} onClose={handleFilterDrawer} placement='right' className="p-4 overflow-y-auto modal-scroll">
                 <div className="mb-6 flex items-center justify-between">
                     <Typography variant="h5" color="blue-gray">
                         {filterDrawer.mode === "cat" ? "دسته بندی ها" : "فیلترها"}

@@ -43,14 +43,25 @@ const FilterSection = () => {
                                 suggestList={fil.suggestList}
                                 selectPlaceHolder={fil.placeHolder}
                             />
+                        case "CheckboxFilter":
+                            return <CheckboxFilter
+                                slug={fil.slug}
+                                title={fil.title}
+                                itemsList={fil.itemsList}
+                            />
+                        case "StatusFilter":
+                            return <SwitchFilter
+                                title={fil.title}
+                                itemsList={fil.itemsList}
+                            />
+
                     }
                 })
 
             }
-            {/* // <PriceFilter />
-            // <DistrictFilter />
+            {/* // 
             // <SwitchFilter />
-            // <SelectFilter />
+
             // <CheckboxFilter /> */}
         </>
     )

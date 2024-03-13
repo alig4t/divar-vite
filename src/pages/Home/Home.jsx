@@ -43,6 +43,7 @@ const Home = () => {
 
 
     useEffect(() => {
+        console.log("ssssssss");
         let ValidCat = true;
         let catObj = {};
         let catSlug = (cat === undefined) ? '' : cat
