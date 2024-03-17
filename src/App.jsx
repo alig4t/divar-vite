@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom"
 import { ContextProvider } from './context/SiteContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Login from './pages/Login/Login';
+import Single from './pages/Single/Single';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <ContextProvider>
         <Routes>
           <Route path='/s/:city/:cat?' element={<Home />} />
+          <Route path='/v/:code/:title?' element={<Single />} />
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<h1>nothing</h1>} />
         </Routes>

@@ -10,14 +10,14 @@ import {
 } from "@material-tailwind/react";
 
 import Ads from "../../JsonFiles/Ads.json"
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import PostSkeleton from "../UI/PostSkeleton";
 import { useEffect, useState } from "react";
 import { useStateContext } from "../../context/SiteContext";
 
 
 const Posts = () => {
-   
+
     const [queryStirng] = useSearchParams();
     const { currentCat } = useStateContext()
     const [loading, setLoading] = useState(false)
@@ -27,7 +27,7 @@ const Posts = () => {
             setLoading(false)
             window.scrollBy({ top: -20, behavior: "smooth" })
         }, 1000);
-    }, [queryStirng,currentCat])
+    }, [queryStirng, currentCat])
 
 
 
@@ -39,35 +39,36 @@ const Posts = () => {
                 فیلترها
             </div> */}
 
-            
-                
 
-                <div className="w-full  grid grid-cols-1 lg:grid-cols-2  gap-x-5 gap-y-3 lg:gap-y-5">
 
-                    {loading ? (
-                        <>
 
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                            <PostSkeleton />
-                        </>
-                    ) : (
-                        <>
-                            {
-                                Ads.map((item) => {
-                                    return (
-                                        <div className="" key={item.id}>
+            <div className="w-full  grid grid-cols-1 lg:grid-cols-2  gap-x-5 gap-y-3 lg:gap-y-5">
+
+                {loading ? (
+                    <>
+
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                        <PostSkeleton />
+                    </>
+                ) : (
+                    <>
+                        {
+                            Ads.map((item) => {
+                                return (
+                                    <div className="" key={item.id}>
+                                        <Link to={`/v/${item.code}/${item.title.replace(/\s+/g, '-').toLowerCase()}`}>
                                             <Card className="min-w-80 overflow-hidden cursor-pointer shadow-sm">
                                                 <div className="w-full h-full flex items-center justify-between pl-2 md:px-3 py-3 border-2 border-gray-50 hover:border-blue-gray-100 transition">
                                                     <div className="px-3 py-2 pb-0 min-h-32 overflow-hidden flex flex-col justify-between gap-2">
@@ -88,16 +89,17 @@ const Posts = () => {
                                                     </div>
                                                 </div>
                                             </Card>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </>
-                    )}
+                                        </Link>
+                                    </div>
+                                )
+                            })
+                        }
+                    </>
+                )}
 
 
-                </div>
-            
+            </div>
+
 
         </>
     );

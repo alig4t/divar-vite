@@ -36,7 +36,7 @@ const Navbar = () => {
             <div className='sticky top-0 bg-white max-w-7xl m-auto flex items-center justify-between gap-3 md:gap-7 px-4 py-2 shadow-sm mb-1 z-10'>
 
 
-                <div className='flex items-center justify-between gap-1 sm:gap-3  flex-grow lg:flex-grow-0'>
+                <div className='flex items-center justify-between gap-1 sm:gap-3 flex-grow'>
                     <div className='border-l-2 pl-4'>
                         <NavLink to={`/s/${slug.city}${slug.filters.cities !== '' ? "?cities=" + slug.filters.cities : ''}`}>
                             <h1 className='text-2xl font-bold text-pink-600 cursor-pointer'>دیــــوار</h1>
@@ -47,7 +47,7 @@ const Navbar = () => {
                     <Button variant="text" className='flex items-center text-blue-gray-900 px-3 py-2.5 gap-1 sm:gap-3 text-md'
                         onClick={showCityModalHandler}
                     >
-                        <FiMapPin />
+                        <FiMapPin  className='flex-shrink-0'/>
                         <p>
                             {titleForNav}
                         </p>
@@ -55,7 +55,7 @@ const Navbar = () => {
 
                     <div className='max-w-full relative flex-1' >
                         <FiSearch className='absolute right-2.5 text-gray-700 m-auto top-0 bottom-0' />
-                        <input className='w-full md:min-w-80 border-2 outline-none rounded-md bg-gray-50 border-gray-100 focus:border-gray-200 focus:bg-white p-1.5 pr-8 pl-3 text-12 text-blue-gray-900' placeholder='جستجو در همه آگهی ها' />
+                        <input className='w-full lg:max-w-96 border-2 outline-none rounded-md bg-gray-50 border-gray-100 focus:border-gray-200 focus:bg-white p-1.5 pr-8 pl-3 text-12 text-blue-gray-900' placeholder='جستجو در همه آگهی ها' />
                     </div>
                 </div>
 

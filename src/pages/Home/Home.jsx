@@ -27,6 +27,7 @@ const Home = () => {
     //   );
     // console.log(hasAccess);
 
+    console.log("Home");
 
     const { city, cat } = useParams()
     const [queryStirng] = useSearchParams();

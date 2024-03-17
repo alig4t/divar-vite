@@ -261,7 +261,7 @@ const CityModal = (props) => {
                 <div className='flex-grow'>
                     {cityList.length > 0 ? (
 
-                        <Button variant="text" className="flex items-center gap-1 transition"
+                        <Button variant="text" className="flex p-2 md:px-4 items-center gap-1 transition"
                             onClick={backToProvinces}
                         >
                             <svg
