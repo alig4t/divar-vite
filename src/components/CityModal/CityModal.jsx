@@ -117,9 +117,11 @@ const CityModal = (props) => {
             citySlug = selectedCities.list[0].slug
         }
         let filtersString = new URLSearchParams(filters);
-        // if (filtersString.size > 0) {
+
+        if (filtersString.toString().length > 0) {
             filtersString = "?" + filtersString;
-        // }
+        }
+
         let urlArray = ['/s', citySlug, currentCat.slug]
         // console.log(filtersString);
         urlArray = urlArray.filter((seg) => seg !== '')
@@ -127,10 +129,10 @@ const CityModal = (props) => {
 
         console.log(urlArray + filtersString);
 
-        alert(urlArray + filtersString)
+        // alert(urlArray + filtersString)
         props.close()
 
-        // navigate(urlArray + filtersString)
+        navigate(urlArray + filtersString)
     }
 
     return (
