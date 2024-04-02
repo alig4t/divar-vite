@@ -117,9 +117,9 @@ const CityModal = (props) => {
             citySlug = selectedCities.list[0].slug
         }
         let filtersString = new URLSearchParams(filters);
-        if (filtersString.size > 0) {
+        // if (filtersString.size > 0) {
             filtersString = "?" + filtersString;
-        }
+        // }
         let urlArray = ['/s', citySlug, currentCat.slug]
         // console.log(filtersString);
         urlArray = urlArray.filter((seg) => seg !== '')
