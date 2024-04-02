@@ -22,11 +22,12 @@ const Navbar = () => {
 
     const { titleForNav, slug } = useStateContext()
 
+
     const [openSide, setOpenSide] = useState(false);
 
     const closeSide = useCallback(() => {
         setOpenSide(false)
-    },[]) 
+    }, [])
 
 
 
@@ -47,7 +48,7 @@ const Navbar = () => {
                     <Button variant="text" className='flex items-center text-blue-gray-900 px-3 py-2.5 gap-1 sm:gap-3 text-md'
                         onClick={showCityModalHandler}
                     >
-                        <FiMapPin  className='flex-shrink-0'/>
+                        <FiMapPin className='flex-shrink-0' />
                         <p>
                             {titleForNav}
                         </p>
@@ -96,9 +97,11 @@ const Navbar = () => {
 
                             {/* <button className='px-3 py-2 text-gray-50 bg-pink-900 text-md rounded-sm hover:bg-rose-900 shadow-md transition '>ثبت آگهی</button>
                        */}
-                            <Button variant="gradient" color='indigo' className='text-sm'>
-                                ثبت آگهی
-                            </Button>
+                            <Link to={'/new'}>
+                                <Button variant="gradient" color='indigo' className='text-sm'>
+                                    ثبت آگهی
+                                </Button>
+                            </Link>
 
                         </div>
 

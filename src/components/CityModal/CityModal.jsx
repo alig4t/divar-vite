@@ -24,13 +24,13 @@ const CityModal = (props) => {
 
     const { currentCity } = useStateContext()
 
-    console.log(currentCity);
+    // console.log(currentCity);
 
     const [provinceList] = useState([...provinces])
     const [cityList, setCityList] = useState([])
     const [selectedCities, setSelectedCities] = useState({ list: [], ids: [] })
 
-    console.log(selectedCities.ids);
+    // console.log(selectedCities.ids);
 
     const navigate = useNavigate()
     const getCities = (parent) => {

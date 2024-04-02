@@ -1,18 +1,17 @@
 
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useSearchParams, useLocation, useNavigate } from "react-router-dom"
 import Layout from '../../components/Layout/Layout';
 
-import CityList from "../../components/CityModal/cities.json"
-import CatList from "../../JsonFiles/Catlist.json"
 import { useStateContext } from '../../context/SiteContext';
-import { URLMakerWithHash, checkValidCat } from '../../helper/Helper';
+import { checkValidCat, checkValidCities, navToLocalCityAndCat } from '../../helper/Helper';
 
 
 import Posts from '../../components/Posts/Posts';
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from '../../components/Navbar/Navbar';
 import PostNav from '../../components/Navbar/PostNav';
+import WrongUrlAlert from '../../components/UI/WrongUrlAlert';
 
 // import { hasGrantedAllScopesGoogle } from '@react-oauth/google';
 
@@ -20,100 +19,66 @@ import PostNav from '../../components/Navbar/PostNav';
 
 const Home = () => {
 
-    // const hasAccess = hasGrantedAllScopesGoogle(
-    //     tokenResponse,
-    //     'google-scope-1',
-    //     'google-scope-2',
-    //   );
-    // console.log(hasAccess);
-
-    console.log("Home");
 
     const { city, cat } = useParams()
     const [queryStirng] = useSearchParams();
-    const location = useLocation()
+    let citiesString = queryStirng.get('cities')
     const navigate = useNavigate()
-    const regexStr = /(^\d+(\,\d+)*$)/g;
-    const regexHash = /(^\d+(\%2C\d+)*$)/g;
+    const location = useLocation()
 
 
     const { currentCity, setCityHandler, currentCat, setCatHandler } = useStateContext()
-    // console.log(city);
-    // console.log(cat);
-    // console.log(queryStirng.get('cities'));
+
+    useEffect(() => {
+        console.log(city);
+        console.log(queryStirng.get('cities'));
+        let [validUrl, cityListArray, ids] = checkValidCities(city, queryStirng.get('cities'))
+        if (validUrl) {
+            let idsStr = (ids.sort()).join("");
+            if (currentCity.idsStr !== idsStr) {
+                setCityHandler(ids, cityListArray)
+            }
+        } else {
+            let url = navToLocalCityAndCat()
+            navigate(url, { state: { wrong: true, type: "city" } })
+        }
+
+    }, [city, citiesString])
 
 
     useEffect(() => {
-        console.log("ssssssss");
         let ValidCat = true;
         let catObj = {};
         let catSlug = (cat === undefined) ? '' : cat
+
         if (catSlug !== currentCat.slug) {
-
             [ValidCat, catObj] = checkValidCat(cat)
-            setCatHandler(catObj)
-        }
-
-        let ids = [];
-        let validAddress = true;
-        let cityListArray = []
-
-        if (city === 'iran' && queryStirng.has('cities') && regexStr.test(queryStirng.get('cities'))) {
-
-            let citiesIdsString = queryStirng.get('cities');
-            let citiesIdsArray = citiesIdsString.split(",");
-            citiesIdsArray.forEach(id => {
-                let cityObj = CityList.find((item) => item.id === Number(id))
-                if (cityObj === undefined || cityObj.parent === 0) {
-                    validAddress = false;
-                } else {
-                    cityListArray.push(cityObj)
-                    ids.push(Number(id))
-                }
-            });
-
-        } else {
-            let singleCityObj = CityList.find((item) => item.slug === city)
-            if (singleCityObj === undefined) {
-                validAddress = false;
+            console.log([ValidCat, catObj]);
+            if (ValidCat) {
+                setCatHandler(catObj)
             } else {
-                ids.push(singleCityObj.id)
-                cityListArray.push(singleCityObj)
+                let url = navToLocalCityAndCat()
+                navigate(url, { state: { wrong: true, type: "cat" } })
             }
         }
 
-        if (validAddress) {
-            let idsStr = (ids.sort()).join("");
+    }, [cat])
 
-            if (currentCity.idsStr !== idsStr) {
-
-                setCityHandler(ids, cityListArray)
-            }
-
-        } else {
-            let prevCityHash = localStorage.getItem("lastCities");
-            let prevCat = localStorage.getItem("catSlug");
-            if (prevCityHash !== null && prevCityHash !== "" && regexHash.test(prevCityHash)) {
-                navigate(URLMakerWithHash(prevCityHash, prevCat), { state: { wrong: true } })
-            } else {
-                navigate('/', { state: { wrong: true } })
-            }
-        }
-
-    }, [location])
 
 
     return (
         <Layout className="">
             <div className='flex items-start m-auto max-w-7xl'>
                 <Sidebar />
-                <div className="w-full px-3 md:px-6 py-6 ">
-                    
+                <div className="w-full px-3 md:px-6 py-6 min-h-screen">
+
                     <PostNav />
 
                     <Posts />
 
                 </div>
+
+                {location.state !== null ? location.state.wrong ? <WrongUrlAlert currentCity={currentCity} currentCat={currentCat} type={location.state.type} /> : "" : ""}
 
             </div>
         </Layout>

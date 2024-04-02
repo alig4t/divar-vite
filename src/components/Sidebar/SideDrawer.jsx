@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Drawer,
     Button,
@@ -10,8 +10,34 @@ import {
 } from "@material-tailwind/react";
 
 import Categories from "./Categories";
+import { supabase } from "../../config";
+import { Link, useNavigate } from "react-router-dom";
 
 const SideDrawer = (props) => {
+
+    const [userLogin, setUserLogin] = useState(null)
+// const navigate = useNavigate()
+    async function getUserInfo() {
+        const { data: { user } } = await supabase.auth.getUser()
+        console.log(user);
+        setUserLogin(user)
+    }
+
+    async function signOut() {
+        const { error } = await supabase.auth.signOut()
+        window.location.reload();
+
+        // return error
+    }
+
+    const signOutHandler = () => {
+        signOut()
+    }
+
+    useEffect(() => {
+        getUserInfo()
+    }, [])
+
     return (
         <>
 
@@ -39,17 +65,31 @@ const SideDrawer = (props) => {
                 </div>
                 <Categories />
 
-                
+
 
                 {/* <Typography color="gray" className="mb-8 pr-4 font-normal">
                     Material Tailwind features multiple React and HTML components, all
                     written with Tailwind CSS classes and Material Design guidelines.
                 </Typography> */}
                 <div className="flex justify-center gap-3">
-                    <Button size="sm" variant="outlined">
-                        ورود
-                    </Button>
-                    <Button size="sm">ثبت نام</Button>
+                    {userLogin ? (
+                        <>
+                            <Button size="sm" variant="outlined">
+                                ثبت آگهی
+                            </Button>
+                            <Button size="sm" onClick={signOutHandler}>خروج</Button>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login">
+                                <Button size="sm" variant="outlined">
+                                    ورود
+                                </Button>
+                            </Link>
+                            <Button size="sm">ثبت نام</Button>
+                        </>
+                    )}
+
                 </div>
             </Drawer>
         </>

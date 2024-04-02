@@ -289,3 +289,24 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+/**** Login ***/
+
+.c-dumjqv{
+  text-decoration: none !important;
+  font-weight: bold;
+  transition: all ease 0.2s;
+}
+.c-dumjqv:hover{
+  color: rgb(224, 55, 83);
+}
+
+.c-bpexlo{
+  display: inline !important;
+  font-weight: bold;
+  color: rgb(38, 50, 26) !important;
+ 
+}
+.c-bOcPnF-cmFMMs-color-primary{
+  background-color: rgb(218, 40, 99) !important;
+  border-color:pink !important;
+}

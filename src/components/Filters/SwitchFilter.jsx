@@ -25,7 +25,7 @@ const SwitchFilter = (props) => {
     }
 
     const checkHandler = slug => {
-        console.log(slug);
+        // console.log(slug);
         urlMakerWithStatus(slug)
     }
 
@@ -34,12 +34,12 @@ const SwitchFilter = (props) => {
 
         props.itemsList.forEach(element => {
             if (queryStirng.has(element.slug) && queryStirng.get(element.slug) === "true") {
-                console.log(element.slug);
+                // console.log(element.slug);
                 switchObject.push(element.slug)
             }
         });
 
-        console.log(switchObject);
+        // console.log(switchObject);
         setSwitchChecked(switchObject)
     }, [queryStirng])
 

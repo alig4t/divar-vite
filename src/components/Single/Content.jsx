@@ -9,6 +9,7 @@ const Content = (props) => {
     const [showTel, setShowTel] = useState(false)
     const [copied, setCopied] = useState(false);
     const [value, copy] = useCopyToClipboard();
+    console.log(props.info);
     return (
         <>
             <div>
@@ -60,56 +61,62 @@ const Content = (props) => {
             </div>
 
             <div>
-                <div className=' w-full flex justify-around items-center pb-6 border-b-2 border-gray-200'>
+                <div className=' w-full flex justify-around items-center pb-6 border-b-2 border-gray-200
+                
+                *:border-l-2 [&>*:last-child]:border-l-0
+                '>
 
-                    <div className='flex flex-col gap-2 border-l-2 border-gray-200 basis-1/3 items-center'>
+                    {
+                        props.info?.featured &&
+
+                        Object.entries(props.info.featured).map(([key, value]) => {
+
+                            return (<div className='flex flex-col gap-2 border-gray-200 basis-1/3 items-center'>
+                                <p className='text-gray-600 text-sm'>{key}</p>
+                                <p className='text-gray-800 font-bold text-sm'>{value}</p>
+                            </div>)
+                        })
+
+                    }
+                    {/* <div className='flex flex-col gap-2 border-l-2 border-gray-200 basis-1/3 items-center'>
                         <p className='text-gray-600 text-sm'>کارکرد</p>
                         <p className='text-gray-800 font-bold text-sm'>۸۵٬۰۰۰</p>
-                    </div>
-
-                    <div className='flex flex-col gap-2 border-l-2 border-gray-200 basis-1/3 items-center'>
-                        <p className='text-gray-600 text-sm'>کارکرد</p>
-                        <p className='text-gray-800 font-bold text-sm'>۸۵٬۰۰۰</p>
-                    </div>
-
-                    <div className='flex flex-col gap-2 basis-1/3 items-center'>
-                        <p className='text-gray-600 text-sm'>کارکرد</p>
-                        <p className='text-gray-800 font-bold text-sm'>۸۵٬۰۰۰</p>
-                    </div>
+                    </div> */}
 
                 </div>
 
 
-                <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                    <span>قیمت کل</span>
-                    <span>۵٬۵۵۵٬000٬000 تومان</span>
-                </div>
+                {
+                    props.info &&
+                    Object.entries(props.info.price).map(([key, value]) => {
+                        return <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
+                            <span>{key}</span>
+                            <span>{Number(value).toLocaleString()} تومان</span>
+                        </div>
+                    })
 
-                <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                    <span>قیمت کل</span>
-                    <span>۵٬۵۵۵٬000٬000 تومان</span>
-                </div>
+                }
 
-                <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                    <span>قیمت کل</span>
-                    <span>۵٬۵۵۵٬000٬000 تومان</span>
-                </div>
 
-                <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                    <span>قیمت کل</span>
-                    <span>۵٬۵۵۵٬000٬000 تومان</span>
-                </div>
+                {
+                    props.info &&
+                    Object.entries(props.info.datas).map(([key, value]) => {
+                        return <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
+                            <span>{key}</span>
+                            <span>{value}</span>
+                        </div>
+                    })
 
-                <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                    <span>قیمت کل</span>
-                    <span>۵٬۵۵۵٬000٬000 تومان</span>
-                </div>
+                }
+
+
             </div>
             <div className='mb-12'>
-                <h6>توضیحات</h6>
+                <h6 className="pb-2 font-bold">توضیحات</h6>
                 <p className='text-md font-thin leading-8'>
 
-                    فول ابوظبی،هدآپ،صندوق برقی،کیت M،فیس ۲۰۱۷،رینگ ۲۰۱۷،فرمان ۲۰۱۷،چراغ ۲۰۱۷،پنل کولر ۲۰۱۷،داخل قرمز،پشت کیلومتر ۲۰۱۷،مموری صندلی
+                    {/* فول ابوظبی،هدآپ،صندوق برقی،کیت M،فیس ۲۰۱۷،رینگ ۲۰۱۷،فرمان ۲۰۱۷،چراغ ۲۰۱۷،پنل کولر ۲۰۱۷،داخل قرمز،پشت کیلومتر ۲۰۱۷،مموری صندلی */}
+                    {props.desc}
                 </p>
             </div>
 
