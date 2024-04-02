@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import CatList from "../../JsonFiles/Catlist.json"
 import Provinces from "../../components/CityModal/provinces.json"
 import CityList from "../../components/CityModal/cities.json"
+import AllFilters from "../../JsonFiles/AllFilters.json"
 import { FiChevronLeft } from 'react-icons/fi';
 import { Button, Input, Option, Select, Textarea, ThemeProvider } from '@material-tailwind/react';
 import { useDropzone } from 'react-dropzone'
@@ -21,6 +22,7 @@ const NewPost = () => {
     const [queryStirng] = useSearchParams();
     const [listShow, setListShow] = useState([])
     const [cat, setCat] = useState(null)
+    const [catFilters, setCatFilters] = useState([])
 
     const navigate = useNavigate()
     let catSlug = queryStirng.get('slug')
@@ -48,6 +50,14 @@ const NewPost = () => {
         if (list.length === 0) {
             setCat(parentObj)
             setListShow([])
+            let catId = parentObj.id
+            let filters = AllFilters.find((item) => {
+                if (item.catId.includes(catId)) {
+                    return item
+                }
+            })
+            console.log(filters);
+            setCatFilters(filters)
         } else {
             setListShow(list)
             setCat(null)
@@ -139,6 +149,41 @@ const NewPost = () => {
                                         <Textarea variant="outlined" label="توضیحات آگهی" />
 
                                         {/* <h3 className='font-bold text-sm'>تصاویر آگهی</h3> */}
+
+
+                            {
+                                catFilters.supa.price.map((item)=>{
+                                    return <Input label={item.title} variant='outlined' type='number' icon="تومان" />
+                                })
+                            }
+
+                                        {
+
+                                            catFilters.supa.datas.map((item) => {
+                                                if (item.type === "select") {
+                                                    return <Select label={item.title}>
+                                                        {item.valid.map((opt) => {
+                                                            return <Option>{opt}</Option>
+                                                        })}
+                                                    </Select>
+                                                }
+                                            })
+                                        }
+                                        {
+                                            catFilters.supa.featured.map((item) => {
+                                                if (item.type === "select") {
+                                                    return <Select label={item.title}>
+                                                        {item.valid.map((opt) => {
+                                                            return <Option>{opt}</Option>
+                                                        })}
+                                                    </Select>
+                                                }else if(item.type === "number"){
+                                                    return <Input label={item.title} type='number' />
+                                                }
+                                            })
+
+                                        }
+
 
                                         <div className='border-b-2 border-pink-500 py-2'>
                                             <h2 className='font-bold'>تصاویر آگهی</h2>

@@ -32,7 +32,7 @@ const theme = {
                 label: {
                     color: "text-gray-700 flex-auto text-right",
                     fontWeight: "font-light text-sm",
-                    
+
                     userSelect: "select-none",
                     cursor: "cursor-pointer",
                     mt: "mt-px",
@@ -42,81 +42,106 @@ const theme = {
             }
         }
     },
-    drawer:{
-        styles:{
-            base:{
-                drawer:{
+    drawer: {
+        styles: {
+            base: {
+                drawer: {
                     boxShadow: "none"
                 }
             }
         }
     },
-    button:{
-        styles:{
-            base:{
-                initial:{
-                    disabled:"disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none",
+    button: {
+        styles: {
+            base: {
+                initial: {
+                    disabled: "disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none",
                 }
             }
         }
     },
     breadcrumbs: {
         defaultProps: {
-          className: "",
-          fullWidth: false,
-          separator: "/",
+            className: "",
+            fullWidth: false,
+            separator: "/",
         },
         styles: {
-          base: {
-            root: {
-              initial: {
-                width: "w-fit",
-              },
-              fullWidth: { display: "block", width: "w-full" },
+            base: {
+                root: {
+                    initial: {
+                        width: "w-fit",
+                    },
+                    fullWidth: { display: "block", width: "w-full" },
+                },
+                list: {
+                    display: "flex",
+                    flexWrap: "flex-wrap",
+                    alignItems: "items-center",
+                    width: "w-full",
+                    bg: "bg-blue-gray-50",
+                    bgOpacity: "bg-opacity-60",
+                    py: "py-2",
+                    px: "px-4",
+                    borderRadius: "rounded-md",
+                },
+                item: {
+                    initial: {
+                        display: "flex",
+                        alignItems: "items-center",
+                        color: "text-blue-gray-900",
+                        fontSmoothing: "antialiased",
+                        fontFamily: "font-sans",
+                        fontSize: "text-sm",
+                        fontWeight: "font-normal",
+                        lineHeight: "leading-normal",
+                        cursor: "cursor-pointer",
+                        transition: "transition-colors duration-300",
+                        hover: "hover:text-light-blue-500",
+                    },
+                    disabled: {
+                        pointerEvents: "pointer-events-none",
+                    },
+                },
+                separator: {
+                    color: "text-blue-gray-500",
+                    fontSize: "text-sm",
+                    fontSmoothing: "antialiased",
+                    fontFamily: "font-sans",
+                    fontWeight: "font-normal",
+                    lineHeight: "leading-normal",
+                    px: "mx-2",
+                    pointerEvents: "pointer-events-none",
+                    userSelcet: "select-none",
+                },
             },
-            list: {
-              display: "flex",
-              flexWrap: "flex-wrap",
-              alignItems: "items-center",
-              width: "w-full",
-              bg: "bg-blue-gray-50",
-              bgOpacity: "bg-opacity-60",
-              py: "py-2",
-              px: "px-4",
-              borderRadius: "rounded-md",
-            },
-            item: {
-              initial: {
-                display: "flex",
-                alignItems: "items-center",
-                color: "text-blue-gray-900",
-                fontSmoothing: "antialiased",
-                fontFamily: "font-sans",
-                fontSize: "text-sm",
-                fontWeight: "font-normal",
-                lineHeight: "leading-normal",
-                cursor: "cursor-pointer",
-                transition: "transition-colors duration-300",
-                hover: "hover:text-light-blue-500",
-              },
-              disabled: {
-                pointerEvents: "pointer-events-none",
-              },
-            },
-            separator: {
-              color: "text-blue-gray-500",
-              fontSize: "text-sm",
-              fontSmoothing: "antialiased",
-              fontFamily: "font-sans",
-              fontWeight: "font-normal",
-              lineHeight: "leading-normal",
-              px: "mx-2",
-              pointerEvents: "pointer-events-none",
-              userSelcet: "select-none",
-            },
-          },
         },
-      },
+    },
+    input: {
+        variants: {
+            outlined: {
+                base: {
+                    input: {
+                        borderWidth: "placeholder-shown:border",
+                        borderColor:
+                            "placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200",
+                        floated: {
+                            borderWidth: "border focus:border-2",
+                            borderColor: "border-t-transparent focus:border-t-transparent",
+                        },
+                    },
+                    inputWithIcon: {
+                        pr: "!pr-9",
+                    },
+                    icon: {
+                        top: "top-2/4",
+                        right: "",
+                        transform: "-translate-y-2/4",
+                    },
+                }
+            }
+        }
+    }
 };
 
 export default theme
