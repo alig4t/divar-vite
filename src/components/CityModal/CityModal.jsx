@@ -127,9 +127,10 @@ const CityModal = (props) => {
 
         console.log(urlArray + filtersString);
 
+        alert(urlArray + filtersString)
         props.close()
 
-        navigate(urlArray + filtersString)
+        // navigate(urlArray + filtersString)
     }
 
     return (
