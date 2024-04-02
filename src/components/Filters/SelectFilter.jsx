@@ -60,8 +60,8 @@ const SelectFilter = (props) => {
             <div className="relative py-2">
 
                 <Select label="سن بنا" value={selected} onChange={(e) => selectHandler(e)} name="selectFilter" color="pink" placeholder={"selectFilter"}  >
-                    {props.suggestList.map((item) => (
-                        <Option value={item.value}>
+                    {props.suggestList.map((item,index) => (
+                        <Option value={item.value} key={index}>
                             {item.title}
                         </Option>
                     ))}

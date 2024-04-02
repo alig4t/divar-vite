@@ -30,14 +30,11 @@ const Home = () => {
     const { currentCity, setCityHandler, currentCat, setCatHandler } = useStateContext()
 
     useEffect(() => {
-        console.log(city);
-        console.log(queryStirng.get('cities'));
+
         let [validUrl, cityListArray, ids] = checkValidCities(city, queryStirng.get('cities'))
         if (validUrl) {
             let idsStr = (ids.sort()).join("");
-            if (currentCity.idsStr !== idsStr) {
-                setCityHandler(ids, cityListArray)
-            }
+            setCityHandler(ids, cityListArray)
         } else {
             let url = navToLocalCityAndCat()
             navigate(url, { state: { wrong: true, type: "city" } })
@@ -53,7 +50,6 @@ const Home = () => {
 
         if (catSlug !== currentCat.slug) {
             [ValidCat, catObj] = checkValidCat(cat)
-            console.log([ValidCat, catObj]);
             if (ValidCat) {
                 setCatHandler(catObj)
             } else {
@@ -67,13 +63,12 @@ const Home = () => {
 
 
     return (
-        <Layout className="">
+        <Layout page="index" className="">
             <div className='flex items-start m-auto max-w-7xl'>
                 <Sidebar />
                 <div className="w-full px-3 md:px-6 py-6 min-h-screen">
 
                     <PostNav />
-
                     <Posts />
 
                 </div>

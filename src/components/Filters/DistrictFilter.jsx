@@ -221,7 +221,7 @@ const DistrictFilter = (props) => {
           <List key={5} className=''>
             {listShow.map((item) => {
               return (
-                <ListItem className="flex py-0 justify-between items-center"
+                <ListItem key={item.id} className="flex py-0 justify-between items-center"
                   onClick={(e) => checkHandler(item.id, item.title)}
                 >
                   <p>{item.title}</p>

@@ -11,7 +11,8 @@ const Layout = (props) => {
             <div className='w-full h-full relative'>
                 <Navbar />
                 {props.children}
-                <BottomNav />
+                {props.page==="index" &&  <BottomNav />}
+               
                 <Footer />
             </div>
         </ThemeProvider>

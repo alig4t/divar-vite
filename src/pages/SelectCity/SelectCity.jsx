@@ -1,23 +1,24 @@
 
-import React, { useEffect, useState } from 'react';
-// import { createClient } from '@supabase/supabase-js'
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CityList from "../../components/CityModal/cities.json"
 import { navToLocalStorageCity } from '../../helper/Helper';
-// const supabase = createClient(
-//   "https://qbaacnllyoyhtndgcvvs.supabase.co",
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFiYWFjbmxseW95aHRuZGdjdnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTEwMzkzMDEsImV4cCI6MjAyNjYxNTMwMX0.X-TRkyMuNPlvG6jr6-yxK5RHvlnJgVyyCRO3OK6QpT8"
-// )
+import { Spinner } from '@material-tailwind/react';
 
 const SelectCity = () => {
-
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-
   useEffect(() => {
+    setLoading(true)
     let [url] = navToLocalStorageCity()
+    setLoading(false)
     navigate(url)
   }, [])
 
+  return (
+    <div className='w-full h-screen flex justify-center items-center'>
+      {loading ? <Spinner className="h-10 w-10 " color='pink' /> : null}
+    </div>
+  )
 
 }
 

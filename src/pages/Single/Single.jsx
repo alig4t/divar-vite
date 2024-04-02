@@ -7,7 +7,6 @@ import Carousel from '../../components/Single/Carousel';
 import Content from '../../components/Single/Content';
 import StickyTell from '../../components/Single/StickyTell';
 
-import Ads from "../../JsonFiles/Ads.json"
 import { supabase } from '../../config';
 import { Spinner } from '@material-tailwind/react';
 
@@ -30,19 +29,14 @@ const Single = () => {
         setLoading(false)
 
     }
-
-    console.log(post.images);
-
+   
     useEffect(() => {
-        // let sing = Ads.find((item) => item.code === code)
-        // setPost(sing)
-        // console.log(singlePost);
         getPost()
     }, [])
 
     return (
 
-        <Layout>
+        <Layout page="single">
             <div className='m-auto max-w-5xl relative'>
 
                 {loading ? (
@@ -70,7 +64,7 @@ const Single = () => {
 
             </div>
             <StickyTell />
-        </Layout >
+        </Layout>
 
     );
 }

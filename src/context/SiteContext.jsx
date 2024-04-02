@@ -4,15 +4,12 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import DefaultFilters from "../JsonFiles/DefaultFilters.json"
 import DefaultFilters2 from "../JsonFiles/DefaultFilters2.json"
 import AllFilters from "../JsonFiles/AllFilters.json"
-import CityList from "../components/CityModal/cities.json"
 import { navToLocalStorageCity } from '../helper/Helper';
 
 const stateContext = createContext()
 
 
 export const ContextProvider = ({ children }) => {
-
-    // console.log("siteContext");
 
     const [currentCity, setCurrentCity] = useState({
         idsStr: "301",
@@ -26,9 +23,7 @@ export const ContextProvider = ({ children }) => {
     });
     const [currentCat, setCurrentCat] = useState({ slug: '', filters: [...DefaultFilters, ...DefaultFilters2] })
 
-
     useEffect(() => {
-        // console.log("single");
         let [url, validArray, ids, idsStr] = navToLocalStorageCity()
         setCurrentCity({
             idsStr,
@@ -57,11 +52,7 @@ export const ContextProvider = ({ children }) => {
     const setCityHandler = (ids, citiesList) => {
         let idsStr = (ids.sort()).join("");
         localStorage.setItem("lastCities", ids.join("%2C"))
-        console.log({
-            idsStr,
-            idsArray: ids,
-            citiesList
-        });
+       
         setCurrentCity({
             idsStr,
             idsArray: ids,
@@ -70,8 +61,6 @@ export const ContextProvider = ({ children }) => {
     }
 
     const setCatHandler = cat => {
-        // console.log("bbbbbbbbbb");
-        console.log(cat);
         if (cat !== undefined) {
             let catFilters = { filter: [{}] }
             if (cat.slug !== '') {
@@ -88,7 +77,6 @@ export const ContextProvider = ({ children }) => {
 
             localStorage.setItem("catSlug", cat.slug)
             setCurrentCat({ ...cat, filters: [...DefaultFilters, ...catFilters.filter, ...DefaultFilters2] })
-            // console.log([...DefaultFilters, ...catFilters.filter, ...DefaultFilters2]);
         }
 
     }

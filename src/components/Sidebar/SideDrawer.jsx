@@ -16,18 +16,15 @@ import { Link, useNavigate } from "react-router-dom";
 const SideDrawer = (props) => {
 
     const [userLogin, setUserLogin] = useState(null)
-// const navigate = useNavigate()
+    // const navigate = useNavigate()
     async function getUserInfo() {
         const { data: { user } } = await supabase.auth.getUser()
-        console.log(user);
         setUserLogin(user)
     }
 
     async function signOut() {
         const { error } = await supabase.auth.signOut()
         window.location.reload();
-
-        // return error
     }
 
     const signOutHandler = () => {
@@ -74,9 +71,11 @@ const SideDrawer = (props) => {
                 <div className="flex justify-center gap-3">
                     {userLogin ? (
                         <>
-                            <Button size="sm" variant="outlined">
-                                ثبت آگهی
-                            </Button>
+                            <Link to={'/new'}>
+                                <Button size="sm" variant="outlined">
+                                    ثبت آگهی
+                                </Button>
+                            </Link>
                             <Button size="sm" onClick={signOutHandler}>خروج</Button>
                         </>
                     ) : (

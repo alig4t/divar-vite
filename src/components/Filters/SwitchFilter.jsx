@@ -51,7 +51,7 @@ const SwitchFilter = (props) => {
                 <h6 className="mb-4 text-16 font-bold text-pink-500 px-2">{props.title}</h6>
                 <div className='flex flex-col gap-3'>
                     {props.itemsList.map((item, index) => {
-                        return <Switch label={item.title} color='pink' checked={switchChecked.includes(item.slug) === true ? true:false}
+                        return <Switch key={index} label={item.title} color='pink' checked={switchChecked.includes(item.slug) === true ? true:false}
                         onChange={()=>checkHandler(item.slug)}
                         />
                     })}

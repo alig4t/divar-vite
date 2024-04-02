@@ -9,7 +9,7 @@ const Content = (props) => {
     const [showTel, setShowTel] = useState(false)
     const [copied, setCopied] = useState(false);
     const [value, copy] = useCopyToClipboard();
-    console.log(props.info);
+
     return (
         <>
             <div>
@@ -70,8 +70,7 @@ const Content = (props) => {
                         props.info?.featured &&
 
                         Object.entries(props.info.featured).map(([key, value]) => {
-
-                            return (<div className='flex flex-col gap-2 border-gray-200 basis-1/3 items-center'>
+                            return (<div key={key} className='flex flex-col gap-2 border-gray-200 basis-1/3 items-center'>
                                 <p className='text-gray-600 text-sm'>{key}</p>
                                 <p className='text-gray-800 font-bold text-sm'>{value}</p>
                             </div>)
@@ -89,7 +88,7 @@ const Content = (props) => {
                 {
                     props.info &&
                     Object.entries(props.info.price).map(([key, value]) => {
-                        return <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
+                        return <div key={key} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
                             <span>{key}</span>
                             <span>{Number(value).toLocaleString()} تومان</span>
                         </div>
@@ -101,7 +100,7 @@ const Content = (props) => {
                 {
                     props.info &&
                     Object.entries(props.info.datas).map(([key, value]) => {
-                        return <div className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
+                        return <div key={key} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
                             <span>{key}</span>
                             <span>{value}</span>
                         </div>

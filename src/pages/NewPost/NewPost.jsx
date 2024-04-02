@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { supabase } from '../../config';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import WithAuthCheck from '../../components/HOC/WithAuthCheck';
 import Navbar from '../../components/Navbar/Navbar';
@@ -9,7 +8,6 @@ import CityList from "../../components/CityModal/cities.json"
 import AllFilters from "../../JsonFiles/AllFilters.json"
 import { FiChevronLeft } from 'react-icons/fi';
 import { Button, Input, Option, Select, Textarea, ThemeProvider } from '@material-tailwind/react';
-import { useDropzone } from 'react-dropzone'
 
 import CustomStyle from "../../assets/css/custom"
 

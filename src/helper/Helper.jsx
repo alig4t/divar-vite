@@ -77,7 +77,7 @@ export const navToLocalStorageCity = () => {
         }]
     }
 
-    // console.log(url);
+    
     let idsStr = (ids.sort()).join("");
     return [url, validArray, ids, idsStr]
 }
@@ -104,7 +104,6 @@ export const checkValidCities = (city, hasCities) => {
 
     if (city === "iran") {
         let isRegexValid = regexStr.test(String(hasCities))
-        console.log("valid: " + isRegexValid);
         if (hasCities.length > 0 && isRegexValid) {
             let citiesIdsString = hasCities;
             let citiesIdsArray = citiesIdsString.split(",");
@@ -133,7 +132,6 @@ export const checkValidCities = (city, hasCities) => {
         }
     }
 
-    console.log([validUrl, cityListArray, ids]);
     return ([validUrl, cityListArray, ids])
 }
 

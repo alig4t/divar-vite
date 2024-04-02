@@ -31,12 +31,14 @@ const FilterSection = () => {
                             />
                         case "DistrictFilter":
                             return <DistrictFilter
+                                key={index}
                                 title={fil.title}
                                 slug={fil.slug}
                                 itemsList={fil.itemsList}
                             />
                         case "SelectTypeFilter":
                             return <SelectFilter
+                                key={index}
                                 title={fil.title}
                                 slug={fil.slug}
                                 unit={fil.unit}
@@ -45,12 +47,14 @@ const FilterSection = () => {
                             />
                         case "CheckboxFilter":
                             return <CheckboxFilter
+                                key={index}
                                 slug={fil.slug}
                                 title={fil.title}
                                 itemsList={fil.itemsList}
                             />
                         case "StatusFilter":
                             return <SwitchFilter
+                                key={index}
                                 title={fil.title}
                                 itemsList={fil.itemsList}
                             />

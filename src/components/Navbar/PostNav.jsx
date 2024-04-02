@@ -11,22 +11,21 @@ import {
 } from "@material-tailwind/react";
 import FilterSection from '../Filters/FilterSection';
 import Categories from '../Sidebar/Categories';
-import { useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 
 const PostNav = () => {
 
     const [filterDrawer, setFilterDrawer] = useState({ open: false, mode: "cat" })
-
+    const { cat } = useParams()
     const [queryString] = useSearchParams()
     let hasQuery = false
-    queryString.forEach((q,i)=>{
-        if(i !== 'cities'){
+    queryString.forEach((q, i) => {
+        if (i !== 'cities') {
             hasQuery = true
         }
     })
-    console.log(hasQuery);
-
+ 
     const handleFilterDrawer = () => {
         setFilterDrawer({ open: false, mode: "cat" })
     }
@@ -37,12 +36,12 @@ const PostNav = () => {
 
                 <Button className={`bg-white flex-shrink-0 flex gap-2 text-sm items-center px-4 py-2.5 text-blue-gray-700 rounded-full  shadow-none border-2 border-gray-200 hover:shadow-none hover:border-pink-500 
  [&>*]:hover:text-pink-600 focus:bg-pink-600 [&>*]:focus:text-white focus:border-pink-700
-    ${false ? "[&>*]:text-pink-600 border-pink-500 " : ""}
+    ${cat ? "[&>*]:text-pink-600 border-pink-500 " : ""}
  `}
                     onClick={() => setFilterDrawer({ open: true, mode: "cat" })}
                 >
                     <BiCategory className="text-lg text-blue-gray-700" />
-                    <sapn>دسته بندی ها</sapn>
+                    <span>دسته بندی ها</span>
                 </Button>
 
                 <div className='relative'>
@@ -54,9 +53,9 @@ const PostNav = () => {
                         onClick={() => setFilterDrawer({ open: true, mode: "filter" })}
                     >
                         <FiSliders className="text-lg text-blue-gray-700" />
-                        <sapn>فیلترها</sapn>
+                        <span>فیلترها</span>
                     </Button>
-                    {/* <span className='w-3 h-3 absolute left-0 top-0 bg-pink-600 rounded-full'></span> */}
+
                 </div>
 
 

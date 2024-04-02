@@ -1,16 +1,10 @@
 import React from 'react';
 
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
+    Card
 } from "@material-tailwind/react";
 
-// import Ads from "../../JsonFiles/Ads.json"
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import PostSkeleton from "../UI/PostSkeleton";
 import { useEffect, useState } from "react";
 import { useStateContext } from "../../context/SiteContext";
@@ -33,8 +27,7 @@ const Posts = () => {
 
 
     const [posts, setPosts] = useState([]);
-    console.log(posts);
-
+   
     useEffect(() => {
         setLoading(true)
         getPosts();
@@ -49,7 +42,7 @@ const Posts = () => {
     async function getPosts() {
         const { data } = await supabase.from("posts").select();
         setPosts(data);
-        // console.log(data);
+        
     }
 
 
@@ -58,12 +51,7 @@ const Posts = () => {
     return (
 
         <>
-            {/* 
-            <div className="w-full">
-                فیلترها
-            </div> */}
-
-
+            
 
 
             <div className="w-full  grid grid-cols-1 lg:grid-cols-2  gap-x-5 gap-y-3 lg:gap-y-5">

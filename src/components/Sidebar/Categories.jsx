@@ -107,7 +107,7 @@ const Categories = () => {
             {
                 catShow.depth > 0 ? (
                     <>
-                        <List className='w-full min-w-full py-1 px-0 text-sm gap-0'>
+                        <List className='w-full min-w-full py-1 px-0 text-sm gap-0' key={1}>
                             {catShow.parent.map((parent, index) => {
                                 return (
 
@@ -130,7 +130,7 @@ const Categories = () => {
 
                         {catShow.sub.map((cat) => {
                             return (
-                                <div className='pr-7'>
+                                <div className='pr-7' key={cat.id}>
                                     <Link to={`/s/${slug.city}/${cat.slug}${slug.filters.cities !== '' ? "?cities=" + slug.filters.cities : ''}`}>
                                         <div className={`border-r-2
                                         ${catShow.depth === 1 ? "text-sm" : "text-xs"}

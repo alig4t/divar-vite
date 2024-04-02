@@ -160,7 +160,7 @@ const CityModal = (props) => {
 
                     {selectedCities.list.map((item) => {
                         return (
-                            <span className='px-2 py-1 bg-red-100 gap-2 flex items-center justify-center rounded-lg'>
+                            <span key={item.id} className='px-2 py-1 bg-red-100 gap-2 flex items-center justify-center rounded-lg'>
                                 <p className='text-red-900 whitespace-nowrap' >{item.title}</p>
                                 <span className='w-5 h-5 flex  justify-center items-center  rounded-full transition hover:bg-brown-100 cursor-pointer'>
                                     <IoIosClose className='text-red-900 text-lg'
