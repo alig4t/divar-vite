@@ -146,10 +146,57 @@ export const getBreadCrumbs = slug => {
         catObj = CatList.find((item) => item.id === catObj.parent)
     }
     bread.push(catObj)
-    
+
     console.log(bread);
 
     return bread.reverse()
 
 }
 
+const now = new Date()
+const nowTime = now.getTime()
+
+export const showDate = (createTime) => {
+
+    let timeObj = new Date(createTime)
+
+    let time = Math.floor(nowTime / 1000 - timeObj.getTime() / 1000)
+
+    let str = ""
+    let hour = Math.floor(time / 3600)
+    console.log(hour);
+
+    // if(hour === 0 ){
+    //     str = "دقایقی پیش"
+    // }else if(0<hour && hour<24){
+    //     str = hour + " ساعت پیش "
+    // }else if( 24 < hour && hour < 168){
+    //     str = Math.floor(hour / 24) + " روز پیش "
+
+    // }else if(168 < hour && hour < 720){
+    //     str = Math.floor(hour / 168) + " هفته پیش "
+
+    // }else if(720 < hour){
+    //     str = Math.floor(hour / 720) + " ماه پیش "
+
+    // }
+    switch (true) {
+        case hour == 0:
+            str = "دقایقی پیش"
+            break;
+        case 0 < hour && hour < 24:
+            str = hour + " ساعت پیش "
+            break;
+        case 24 < hour && hour < 168:
+            str = Math.floor(hour / 24) + " روز پیش "
+            break;
+        case 168 < hour && hour < 720:
+            str = Math.floor(hour / 168) + " هفته پیش "
+            break;
+        case 720 < hour:
+            str = Math.floor(hour / 720) + " ماه پیش "
+            break;
+    }
+    console.log(str);
+    return str
+}

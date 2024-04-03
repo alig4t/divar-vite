@@ -87,12 +87,13 @@ const Content = (props) => {
 
                 {
                     props.info &&
-                    Object.entries(props.info.price).map(([key, value]) => {
-                        return <div key={key} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                            <span>{key}</span>
-                            <span>{Number(value).toLocaleString()} تومان</span>
-                        </div>
+                    props.info.price.map((item,index)=>{
+                        return <div key={index} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
+                        <span>{item.title}</span>
+                        <span>{Number(item.value).toLocaleString()} تومان</span>
+                    </div>
                     })
+                   
 
                 }
 
