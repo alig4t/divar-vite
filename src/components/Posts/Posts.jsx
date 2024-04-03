@@ -32,17 +32,14 @@ const Posts = () => {
         setLoading(true)
         getPosts();
       
-        setTimeout(() => {
-            setLoading(false)
-            window.scrollBy({ top: -20, behavior: "smooth" })
-        }, 500);
       
     }, [queryStirng, currentCat]);
 
     async function getPosts() {
         const { data } = await supabase.from("posts").select();
         setPosts(data);
-        
+        setLoading(false)
+        window.scrollBy({ top: -20, behavior: "smooth" })
     }
 
 

@@ -92,7 +92,7 @@ const Login = () => {
     //     <button onClick={() => supabase.auth.signOut()}>Sign out</button>
     //   </div>
     // );
-    navigate('/dashboard')
+    navigate('/')
   }
 
 

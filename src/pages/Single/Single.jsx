@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Layout from '../../components/Layout/Layout';
 import Breadcrumbs from '../../components/Single/Breadcrumbs';
@@ -29,7 +29,10 @@ const Single = () => {
         setLoading(false)
 
     }
-   
+
+
+
+
     useEffect(() => {
         getPost()
     }, [])

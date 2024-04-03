@@ -3,6 +3,12 @@ const theme = {
     select: {
         styles: {
             base: {
+                container: {
+                    position: "relative",
+                    width: "w-full",
+                    minWidth: "min-w-[80px]",
+                  },
+
                 select: {
 
                     textAlign: "text-right [&>span]:right-8 [&>span]:text-pink-500",
@@ -117,31 +123,7 @@ const theme = {
             },
         },
     },
-    input: {
-        variants: {
-            outlined: {
-                base: {
-                    input: {
-                        borderWidth: "placeholder-shown:border",
-                        borderColor:
-                            "placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200",
-                        floated: {
-                            borderWidth: "border focus:border-2",
-                            borderColor: "border-t-transparent focus:border-t-transparent",
-                        },
-                    },
-                    inputWithIcon: {
-                        pr: "!pr-9",
-                    },
-                    icon: {
-                        top: "top-2/4",
-                        right: "",
-                        transform: "-translate-y-2/4",
-                    },
-                }
-            }
-        }
-    }
+    
 };
 
 export default theme

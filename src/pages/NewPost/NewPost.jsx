@@ -17,6 +17,9 @@ const NewPost = () => {
     // let user = supabase.auth.user
     // const { data: { user } } = await supabase.auth.getUser()
 
+    
+
+
     const [queryStirng] = useSearchParams();
     const [listShow, setListShow] = useState([])
     const [cat, setCat] = useState(null)
@@ -128,12 +131,15 @@ const NewPost = () => {
                                         <div className='flex gap-2 '>
                                             <Select size='lg' color="teal" label="انتخاب استان"
                                                 onChange={(e) => proHandler(e)}
+                                                className='min-w-[100px]'
                                             >
                                                 {Provinces.map((item) => {
                                                     return <Option value={item}>{item.title}</Option>
                                                 })}
                                             </Select>
-                                            <Select size='lg' color='teal' label="انتخاب شهر" disabled={provinceInput === 0 ? true : false}>
+                                            <Select size='lg' color='teal' label="انتخاب شهر" disabled={provinceInput === 0 ? true : false}
+                                             className='min-w-16'
+                                            >
                                                 {cityInput.map((city) => {
                                                     return <Option value={city.id}>{city.title}</Option>
                                                 })}
@@ -144,20 +150,38 @@ const NewPost = () => {
                                             <Input variant="outlined" size='lg' maxLength="70" color='teal' label="عنوان آگهی" placeholder="" />
                                         </div>
 
-                                        <Textarea variant="outlined" label="توضیحات آگهی" />
-
+                                       
                                         {/* <h3 className='font-bold text-sm'>تصاویر آگهی</h3> */}
 
 
-                            {
-                                catFilters.supa.price.map((item)=>{
-                                    return <Input label={item.title} variant='outlined' type='number' icon="تومان" />
-                                })
-                            }
+                                        {
+                                            catFilters?.supa?.price.map((item) => {
+                                                return <div className="relative flex w-full">
+                                                <Input
+                                                    type="number"
+                                                    label={item.title}
+                                                    className="pl-20"
+                                                    containerProps={{
+                                                        className: "min-w-0",
+                                                    }}
+                                                />
+                                                <Button
+                                                    size="sm"
+                                                    color={true ? "pink" : "blue-gray"}
+                                                    variant='text'
+                                                    className="!absolute left-1 top-1 rounded"
+                                                >
+                                                    {item.unit}
+                                                </Button>
+                                            </div>
+                                            })
+                                        }
 
+                                        
+                                        
                                         {
 
-                                            catFilters.supa.datas.map((item) => {
+                                            catFilters?.supa?.datas.map((item) => {
                                                 if (item.type === "select") {
                                                     return <Select label={item.title}>
                                                         {item.valid.map((opt) => {
@@ -168,19 +192,39 @@ const NewPost = () => {
                                             })
                                         }
                                         {
-                                            catFilters.supa.featured.map((item) => {
+                                            catFilters?.supa?.featured.map((item) => {
                                                 if (item.type === "select") {
                                                     return <Select label={item.title}>
                                                         {item.valid.map((opt) => {
                                                             return <Option>{opt}</Option>
                                                         })}
                                                     </Select>
-                                                }else if(item.type === "number"){
-                                                    return <Input label={item.title} type='number' />
+                                                } else if (item.type === "number") {
+                                                    return <div className="relative flex w-full">
+                                                    <Input
+                                                        type="number"
+                                                        label={item.title}
+                                                        className="pl-20"
+                                                        containerProps={{
+                                                            className: "min-w-0",
+                                                        }}
+                                                    />
+                                                    <Button
+                                                        size="sm"
+                                                        color={true ? "pink" : "blue-gray"}
+                                                        variant='text'
+                                                        className="!absolute left-1 top-1 rounded"
+                                                    >
+                                        
+                                        {item.unit}
+                                                    </Button>
+                                                </div>
                                                 }
                                             })
 
                                         }
+
+<Textarea variant="outlined" label="توضیحات آگهی" />
 
 
                                         <div className='border-b-2 border-pink-500 py-2'>
