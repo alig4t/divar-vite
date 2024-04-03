@@ -49,7 +49,7 @@ const Single = () => {
 
                 ) : (
                     <>
-                        <Breadcrumbs />
+                        <Breadcrumbs cat={post.category} postTitle={post.title} />
                         <div className="w-full grid grid-cols-1 md:grid-cols-11 md:gap-5 px-3 md:px-6">
                             <div className='order-2 md:order-1 md:col-span-6 py-4 px-4 md:pl-10 flex flex-col gap-10'>
                                 <Content

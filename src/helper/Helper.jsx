@@ -66,10 +66,10 @@ export const navToLocalStorageCity = () => {
         url = "/s/iran?cities=" + ids.join("%2C")
     } else if (validArray.length === 1) {
         url = "/s/" + validArray[0].slug
-    }else{
+    } else {
         url = "/s/" + "tehran"
-        ids=[113]
-        validArray=[{
+        ids = [113]
+        validArray = [{
             "id": 301,
             "title": "تهران",
             "slug": "tehran",
@@ -77,10 +77,11 @@ export const navToLocalStorageCity = () => {
         }]
     }
 
-    
+
     let idsStr = (ids.sort()).join("");
     return [url, validArray, ids, idsStr]
 }
+
 
 
 export const navToLocalCityAndCat = () => {
@@ -135,4 +136,20 @@ export const checkValidCities = (city, hasCities) => {
     return ([validUrl, cityListArray, ids])
 }
 
+
+export const getBreadCrumbs = slug => {
+    let bread = []
+    let catObj = CatList.find((item) => item.slug === slug)
+
+    while (catObj.parent !== 0) {
+        bread.push(catObj)
+        catObj = CatList.find((item) => item.id === catObj.parent)
+    }
+    bread.push(catObj)
+    
+    console.log(bread);
+
+    return bread.reverse()
+
+}
 
