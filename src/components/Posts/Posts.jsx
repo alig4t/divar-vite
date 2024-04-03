@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+    Button,
     Card
 } from "@material-tailwind/react";
 
@@ -16,6 +17,7 @@ const Posts = () => {
     const [queryStirng] = useSearchParams();
     const { currentCat } = useStateContext()
     const [loading, setLoading] = useState(false)
+    const [error,setError] = useState(null)
     // useEffect(() => {
     //     setLoading(true)
     //     setTimeout(() => {
@@ -24,22 +26,29 @@ const Posts = () => {
     //     }, 1000);
     // }, [queryStirng, currentCat])
 
-
+console.log(error);
 
     const [posts, setPosts] = useState([]);
    
     useEffect(() => {
-        setLoading(true)
         getPosts();
-      
-      
     }, [queryStirng, currentCat]);
 
     async function getPosts() {
-        const { data } = await supabase.from("posts").select();
-        setPosts(data);
-        setLoading(false)
-        window.scrollBy({ top: -20, behavior: "smooth" })
+        setLoading(true)
+        const { data,error } = await supabase.from("posts").select();
+        console.log(error);
+        setTimeout(() => {
+            if(!error){
+                setPosts(data);
+                setLoading(false)
+                setError(null)
+                window.scrollBy({ top: -20, behavior: "smooth" })
+            }else{
+                setError(error)
+                setLoading(false)
+            }
+        }, 500);
     }
 
 
@@ -74,6 +83,14 @@ const Posts = () => {
                 ) : (
                     <>
                         {
+                        error ? (
+                            <div className='w-full text-center mt-4'>
+                            <h6 className=' font-bold'>خطا در برقراری ارتباط</h6>
+                            <Button variant='outlined' size='sm' color='pink' className='my-3'
+                            onClick={getPosts}
+                            >تلاش مجدد</Button>
+                            </div>
+                        ) : 
                             posts?.map((item) => {
                                 return (
                                     <div className="" key={item.code}>
