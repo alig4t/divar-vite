@@ -39,7 +39,9 @@ const Posts = () => {
 
     async function getPosts() {
         setLoading(true)
-        const { data, error } = await supabase.from("posts").select();
+        const { data, error } = await supabase.from("posts")
+        .select()
+        .order('created_at',{ascending:false})
         console.log(error);
         setTimeout(() => {
             if (!error) {
