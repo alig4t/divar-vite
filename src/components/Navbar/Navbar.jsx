@@ -68,7 +68,7 @@ const Navbar = () => {
 
                         <div className='hidden lg:flex items-center justify-end gap-4'>
 
-                            <Link to={'/'}>
+                            <Link to={'/dashboard'}>
                                 <div className='flex items-center gap-2 justify-center px-2 py-3 transition rounded-md hover:bg-gray-100'>
                                     <span>
                                         <FiUser />
