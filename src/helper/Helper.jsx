@@ -185,3 +185,21 @@ export const showDate = (createTime) => {
     
     return str
 }
+
+export function makeCodePost(length = 8) {
+    let result = '';
+    const onlyChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    const onlyCharsLength = onlyChars.length;
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+
+    let counter = 0;
+    result += onlyChars.charAt(Math.floor(Math.random() * onlyCharsLength));
+    while (counter < length - 1) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    // console.log(result);
+    return result;
+}

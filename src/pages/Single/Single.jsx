@@ -55,7 +55,9 @@ const Single = () => {
                                 <Content
                                     title={post.title}
                                     desc={post.description}
-                                    info={post.postDetail} />
+                                    info={post.postDetail} 
+                                    location={post.location}
+                                    />
                             </div>
                             <div className='order-1 md:order-2 md:col-span-5 py-4'>
                                 <Carousel imgs={post.images} />

@@ -113,24 +113,26 @@ const Posts = () => {
                                                                 <p className="line-clamp-1">
 
                                                                     {
-                                                                        item.postDetail.status &&
-                                                                        item.postDetail.status.value.toLocaleString() + " " + item.postDetail.status.unit
+                                                                        item.postDetail.status ? item.postDetail.status.type === 'number'?
+                                                                        Number(item.postDetail.status.value).toLocaleString() + " " + item.postDetail.status.unit
+                                                                        : item.postDetail.status.value
+                                                                        :null
                                                                     }
                                                                 </p>
                                                                 <p className="line-clamp-1">
-                                                                    {(item.postDetail.price[0].value).toLocaleString() + " " + "تومان"}
+                                                                    {Number(item.postDetail?.price[0]?.value).toLocaleString() + " " + "تومان"}
 
 
                                                                 </p>
                                                                 <p className="line-clamp-1">
                                                                     
-                                                                    {showDate(item.created_at) + " در "}  {item.location.mahal}
+                                                                    {showDate(item.created_at) + " در "}  {item.location?.mahale}
                                                                     
                                                                     </p>
                                                             </div>
                                                         </div>
                                                         <div className="flex-shrink-0 self-center bg-blue-gray-50 rounded-md">
-                                                            <img src={item.images[0]}
+                                                            <img src={item.images? item.images[0] : ''}
                                                                 className="w-32 h-32 rounded-md object-cover"
                                                             />
                                                         </div>

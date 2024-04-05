@@ -17,7 +17,12 @@ const Content = (props) => {
                     {props.title}
                 </h1>
                 <p className='text-gray-600 text-sm'>
-                    دقایقی پیش در تهران، تهرانپارس شرقی
+
+                    {
+                        "دقایقی پیش در" + " " + props.location.city + ", " + props.location.mahale
+                    }
+
+
                 </p>
             </div>
 
@@ -67,14 +72,20 @@ const Content = (props) => {
                 '>
 
                     {
-                        props.info?.featured &&
-
-                        Object.entries(props.info.featured).map(([key, value]) => {
-                            return (<div key={key} className='flex flex-col gap-2 border-gray-200 basis-1/3 items-center'>
-                                <p className='text-gray-600 text-sm'>{key}</p>
-                                <p className='text-gray-800 font-bold text-sm'>{value}</p>
-                            </div>)
+                        props.info?.featured?.map((item, index) => {
+                            return <div key={index} className='flex flex-col gap-2 border-gray-200 basis-1/3 items-center'>
+                                <p className='text-gray-600 text-sm'>{item.title}</p>
+                                <p className='text-gray-800 font-bold text-sm'>{item.value}</p>
+                            </div>
                         })
+                        // props.info?.featured &&
+
+                        // Object.entries(props.info.featured).map(([key, value]) => {
+                        //     return (<div key={key} className='flex flex-col gap-2 border-gray-200 basis-1/3 items-center'>
+                        //         <p className='text-gray-600 text-sm'>{key}</p>
+                        //         <p className='text-gray-800 font-bold text-sm'>{value}</p>
+                        //     </div>)
+                        // })
 
                     }
                     {/* <div className='flex flex-col gap-2 border-l-2 border-gray-200 basis-1/3 items-center'>
@@ -86,26 +97,33 @@ const Content = (props) => {
 
 
                 {
+
                     props.info &&
-                    props.info.price.map((item,index)=>{
+                    props.info.price.map((item, index) => {
                         return <div key={index} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                        <span>{item.title}</span>
-                        <span>{Number(item.value).toLocaleString()} تومان</span>
-                    </div>
+                            <span>{item.title}</span>
+                            <span>{Number(item.value).toLocaleString()} تومان</span>
+                        </div>
                     })
-                   
+
 
                 }
 
 
                 {
-                    props.info &&
-                    Object.entries(props.info.datas).map(([key, value]) => {
-                        return <div key={key} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
-                            <span>{key}</span>
-                            <span>{value}</span>
+                    props.info?.datas?.map((item, index) => {
+                        return <div key={index} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
+                            <span>{item.title}</span>
+                            <span>{item.value}</span>
                         </div>
                     })
+                    // props.info &&
+                    // Object.entries(props.info.datas).map(([key, value]) => {
+                    //     return <div key={key} className='flex justify-between items-center border-b-2 border-gray-200 py-4'>
+                    //         <span>{key}</span>
+                    //         <span>{value}</span>
+                    //     </div>
+                    // })
 
                 }
 
