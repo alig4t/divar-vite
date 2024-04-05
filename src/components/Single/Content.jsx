@@ -19,7 +19,7 @@ const Content = (props) => {
                 <p className='text-gray-600 text-sm'>
 
                     {
-                        "دقایقی پیش در" + " " + props.location.city + ", " + props.location.mahale
+                        "دقایقی پیش در" + " " + props.location.city + ", " + props.location.mahal
                     }
 
 

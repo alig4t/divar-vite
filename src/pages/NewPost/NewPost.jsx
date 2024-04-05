@@ -3,11 +3,11 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import WithAuthCheck from '../../components/HOC/WithAuthCheck';
 import CatList from "../../JsonFiles/Catlist.json"
 const CatParents = [
-    {"id":14,"slug":"real-estate","title":"املاک","parent":0,"icon":"house-svgrepo-com (3).svg","hasChildren":true},
-    {"id":15,"slug":"vehicles","title":"وسایل نقلیه","parent":0, "icon":"car-svgrepo-com (2).svg","hasChildren":true},
-    {"id":16,"slug":"electronic-devices","title":"کالای دیجیتال","parent":0,"icon":"smartphone-svgrepo-com.svg","hasChildren":true},
-    {"id":17,"slug":"home-kitchen","title":"خانه و آشپزخانه","parent":0,"icon":"oven-svgrepo-com.svg","hasChildren":true},
-    {"id":19,"slug":"personal-goods","title":"وسایل شخصی","parent":0,"icon":"smartwatch-svgrepo-com.svg","hasChildren":true},
+    { "id": 14, "slug": "real-estate", "title": "املاک", "parent": 0, "icon": "house-svgrepo-com (3).svg", "hasChildren": true },
+    { "id": 15, "slug": "vehicles", "title": "وسایل نقلیه", "parent": 0, "icon": "car-svgrepo-com (2).svg", "hasChildren": true },
+    { "id": 16, "slug": "electronic-devices", "title": "کالای دیجیتال", "parent": 0, "icon": "smartphone-svgrepo-com.svg", "hasChildren": true },
+    { "id": 17, "slug": "home-kitchen", "title": "خانه و آشپزخانه", "parent": 0, "icon": "oven-svgrepo-com.svg", "hasChildren": true },
+    { "id": 19, "slug": "personal-goods", "title": "وسایل شخصی", "parent": 0, "icon": "smartwatch-svgrepo-com.svg", "hasChildren": true },
 ]
 import Provinces from "../../components/CityModal/provinces.json"
 import CityList from "../../components/CityModal/cities.json"
@@ -84,6 +84,7 @@ const NewPost = () => {
     const [form, setForm] = useState([])
 
     const navigate = useNavigate()
+    const [inserting, setInserting] = useState(false)
 
     let catSlug = queryStirng.get('slug')
 
@@ -107,11 +108,11 @@ const NewPost = () => {
         let parentObj = {}
         if (parentSlug === '') {
             list = [
-                {"id":14,"slug":"real-estate","title":"املاک","parent":0,"icon":"house-svgrepo-com (3).svg","hasChildren":true},
-                {"id":15,"slug":"vehicles","title":"وسایل نقلیه","parent":0, "icon":"car-svgrepo-com (2).svg","hasChildren":true},
-                {"id":16,"slug":"electronic-devices","title":"کالای دیجیتال","parent":0,"icon":"smartphone-svgrepo-com.svg","hasChildren":true},
-                {"id":17,"slug":"home-kitchen","title":"خانه و آشپزخانه","parent":0,"icon":"oven-svgrepo-com.svg","hasChildren":true},
-                {"id":19,"slug":"personal-goods","title":"وسایل شخصی","parent":0,"icon":"smartwatch-svgrepo-com.svg","hasChildren":true},
+                { "id": 14, "slug": "real-estate", "title": "املاک", "parent": 0, "icon": "house-svgrepo-com (3).svg", "hasChildren": true },
+                { "id": 15, "slug": "vehicles", "title": "وسایل نقلیه", "parent": 0, "icon": "car-svgrepo-com (2).svg", "hasChildren": true },
+                { "id": 16, "slug": "electronic-devices", "title": "کالای دیجیتال", "parent": 0, "icon": "smartphone-svgrepo-com.svg", "hasChildren": true },
+                { "id": 17, "slug": "home-kitchen", "title": "خانه و آشپزخانه", "parent": 0, "icon": "oven-svgrepo-com.svg", "hasChildren": true },
+                { "id": 19, "slug": "personal-goods", "title": "وسایل شخصی", "parent": 0, "icon": "smartwatch-svgrepo-com.svg", "hasChildren": true },
             ]
 
         } else {
@@ -186,7 +187,7 @@ const NewPost = () => {
 
 
     async function insertPost() {
-
+        setInserting(true)
         let emptyInput = false
         let errorIndexs = { city: false, mahal: false, other: [] }
         if (cityVal === "") {
@@ -204,6 +205,7 @@ const NewPost = () => {
 
         if (emptyInput || errorIndexs.city || errorIndexs.mahal) {
             setErrorForm(errorIndexs)
+            setInserting(false)
             return 0;
         }
 
@@ -219,7 +221,7 @@ const NewPost = () => {
         let code = makeCodePost()
         let location = {
             city: cityVal,
-            mahale: mahalVal
+            mahal: mahalVal
         }
         let title = form.find((item) => item.show === 'title').value
         let desc = form.find((item) => item.show === 'desc').value
@@ -249,7 +251,7 @@ const NewPost = () => {
             ])
             .select()
         console.log(data, error);
-        if(error === null) {
+        if (error === null) {
             navigate('/')
         }
 
@@ -432,11 +434,12 @@ const NewPost = () => {
                                 </section>
 
 
-                               
+
 
                                 <div className='w-full text-left'>
-                                    <Button color='green' className='max-w-28'
+                                    <Button color='green' className='max-w-44'
                                         onClick={insertPost}
+                                        loading={inserting ? true : false}
                                     >ثبت آگهی</Button>
                                 </div>
 
