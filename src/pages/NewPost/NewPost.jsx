@@ -69,11 +69,7 @@ const states = [
 ]
 
 
-const NewPost = () => {
-
-
-    // let user = supabase.auth.user
-    // const { data: { user } } = await supabase.auth.getUser()
+const NewPost = (props) => {
 
 
     const [queryStirng] = useSearchParams();
@@ -247,7 +243,7 @@ const NewPost = () => {
         const { data, error } = await supabase
             .from('posts')
             .insert([
-                { code, images: results, title, category: catSlug, postDetail, description: desc, location },
+                { code, images: results, title, category: catSlug, postDetail, description: desc, location ,author:props.user.id },
             ])
             .select()
         console.log(data, error);

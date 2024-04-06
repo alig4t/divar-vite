@@ -24,7 +24,7 @@ const CityModal = (props) => {
 
     const { currentCity } = useStateContext()
 
-    // console.log(currentCity);
+    console.log("city Modal");
 
     const [provinceList] = useState([...provinces])
     const [cityList, setCityList] = useState([])
@@ -313,7 +313,7 @@ const CityModal = (props) => {
     );
 }
 
-export default CityModal;
+export default React.memo(CityModal);
 
 
 

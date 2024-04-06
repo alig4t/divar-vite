@@ -41,7 +41,7 @@ const WithAuthCheck = (WrappedComponent) => {
             getUserInfo()
         }, [])
 
-        return userLogin && <WrappedComponent />
+        return userLogin && <WrappedComponent user={userLogin} />
 
     }
 }

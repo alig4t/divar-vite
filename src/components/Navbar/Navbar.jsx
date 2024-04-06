@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext, useEffect, useCallback, useMemo } from 'react';
 import { useState } from 'react'
 
 import { Link, NavLink } from 'react-router-dom';
@@ -16,9 +16,14 @@ import SideDrawer from '../Sidebar/SideDrawer';
 const Navbar = () => {
 
     const [cityModalOpen, setCityModalOpen] = useState(false)
-    const showCityModalHandler = () => {
-        setCityModalOpen((prev) => !prev)
+    
+    const showCityModalHandler = () =>  {
+        setCityModalOpen(true)
     }
+
+    const closeCityModalHandler = useCallback(() =>  {
+        setCityModalOpen(false)
+    },[])
 
     const { titleForNav, slug } = useStateContext()
 
@@ -121,7 +126,7 @@ const Navbar = () => {
             </div>
 
 
-            <CityModal show={cityModalOpen} close={showCityModalHandler} />
+            <CityModal show={cityModalOpen} close={closeCityModalHandler} />
 
             <SideDrawer open={openSide} close={closeSide} />
 
@@ -130,4 +135,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+export default React.memo(Navbar);

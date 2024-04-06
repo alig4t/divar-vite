@@ -161,12 +161,11 @@ export const showDate = (createTime) => {
     let timeObj = new Date(createTime)
 
     let time = Math.floor((nowTime - timeObj.getTime()) / 1000)
-
     let str = ""
     let hour = Math.floor(time / 3600)
 
     switch (true) {
-        case hour == 0:
+        case hour < 1:
             str = "دقایقی پیش"
             break;
         case 0 < hour && hour < 24:

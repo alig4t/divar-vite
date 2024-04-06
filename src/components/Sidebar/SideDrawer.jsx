@@ -15,6 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SideDrawer = (props) => {
 
+    console.log("drwaer");
     const [userLogin, setUserLogin] = useState(null)
     // const navigate = useNavigate()
     async function getUserInfo() {
@@ -95,4 +96,4 @@ const SideDrawer = (props) => {
     );
 }
 
-export default SideDrawer;
+export default React.memo(SideDrawer);

@@ -21,15 +21,9 @@ const Posts = () => {
     const { currentCat } = useStateContext()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    // useEffect(() => {
-    //     setLoading(true)
-    //     setTimeout(() => {
-    //         setLoading(false)
-    //         window.scrollBy({ top: -20, behavior: "smooth" })
-    //     }, 1000);
-    // }, [queryStirng, currentCat])
 
-    console.log(error);
+
+    console.log("posts");
 
     const [posts, setPosts] = useState([]);
 
@@ -38,14 +32,13 @@ const Posts = () => {
     }, [queryStirng, currentCat]);
 
     async function getPosts() {
+        console.log("get posts");
         setLoading(true)
         const { data, error } = await supabase.from("posts")
         .select()
         .order('created_at',{ascending:false})
-        console.log(error);
         setTimeout(() => {
             if (!error) {
-                console.log(data);
                 setPosts(data);
                 setLoading(false)
                 setError(null)
@@ -126,7 +119,7 @@ const Posts = () => {
                                                                 </p>
                                                                 <p className="line-clamp-1">
                                                                     
-                                                                    {showDate(item.created_at) + " در "}  {item.location?.mahale}
+                                                                    {showDate(item.created_at) + " در "}  {item.location?.mahal}
                                                                     
                                                                     </p>
                                                             </div>
