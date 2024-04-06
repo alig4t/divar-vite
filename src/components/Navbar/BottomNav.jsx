@@ -20,7 +20,7 @@ const BottomNav = () => {
                     <p className="text-11 font-bold text-gray-600">آگهی ها</p>
                 </Link>
 
-                <Link to={slug} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer [&>*]:hover:text-gray-900">
+                <Link to={''} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer [&>*]:hover:text-gray-900">
                     <FiAlignJustify className="w-6 h-6 text-gray-800" />
                     <p className="text-11 font-bold text-gray-600">دسته ها</p>
                 </Link>
@@ -32,13 +32,13 @@ const BottomNav = () => {
                 </Link>
 
                 
-                <Link to={'/login'} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer [&>*]:hover:text-gray-900">
+                <Link to={'/dashboard'} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer [&>*]:hover:text-gray-900">
                     <FiUserPlus className="w-6 h-6 text-gray-800" />
-                    <p className="text-11 font-bold text-gray-600">ورود</p>
+                    <p className="text-11 font-bold text-gray-600">حساب کاربری</p>
                 </Link>
 
 
-                <Link to={slug} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer [&>*]:hover:text-gray-900">
+                <Link to={''} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer [&>*]:hover:text-gray-900">
                     <FiPocket className="w-6 h-6 text-gray-800" />
                     <p className="text-11 font-bold text-gray-600">پشتیبانی</p>
                 </Link>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../config';
 import DashboardLayout from '../../components/Layout/DashboardLayout';
 import { Button, Card } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PiNewspaperClippingLight } from "react-icons/pi";
 import WithAuthCheck from '../../components/HOC/WithAuthCheck';
 
@@ -14,7 +14,7 @@ const Dashboard = (props) => {
     console.log(props.user);
 
     const [myPosts, setMyPosts] = useState([]);
-
+    const navigate = useNavigate()
     useEffect(() => {
         getPosts();
     }, []);
@@ -29,11 +29,15 @@ const Dashboard = (props) => {
         setMyPosts(data)
     }
 
+    async function signOut() {
+        const { error } = await supabase.auth.signOut()
+        navigate('/')
+    }
 
 
     // console.log(data);
     return (
-        <DashboardLayout>
+        <DashboardLayout signOut={signOut}>
 
             <div className='flex flex-col lg:flex-row  gap-5 items-start m-auto max-w-7xl p-4'>
 
@@ -51,7 +55,7 @@ const Dashboard = (props) => {
                             </Button>
                         </Link>
                     </div> */}
-                    <div className='max-w-full overflow-x-auto flex lg:flex-col gap-2 py-2 list-scroll'>
+                    <div className='max-w-full overflow-x-auto flex lg:flex-col gap-2 py-2 list-scroll2'>
 
                         {
                             myPosts?.map((item) => {

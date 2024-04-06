@@ -82,7 +82,7 @@ const Navbar = () => {
                                 </div>
                             </Link>
 
-                            <Link to={'/'}>
+                            <Link to={''}>
                                 <div className='flex items-center gap-2 justify-center  px-2 py-3 transition rounded-md hover:bg-gray-100'>
                                     <span>
                                         <FiMessageSquare />
@@ -91,7 +91,7 @@ const Navbar = () => {
                                 </div>
                             </Link>
 
-                            <Link to={'/'}>
+                            <Link to={''}>
                                 <div className='flex items-center gap-2 justify-center  px-2 py-3 transition rounded-md hover:bg-gray-100'>
                                     <span>
                                         <FiTag />

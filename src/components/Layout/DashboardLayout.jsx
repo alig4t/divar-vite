@@ -12,29 +12,24 @@ import {
 } from "@material-tailwind/react";
 
 const DashboardLayout = (props) => {
-    const { titleForNav, slug } = useStateContext()
+    const { slug } = useStateContext()
 
-
-
+    
     return (
         <>
             <div className='sticky top-0 bg-white max-w-7xl m-auto flex items-center justify-between gap-3 md:gap-7 px-4 py-2 shadow-sm mb-1 z-10'>
 
 
                 <div className='flex items-center justify-between gap-1 sm:gap-3'>
-                    <div className=''>
+                    <div className='pl-2'>
                         <NavLink to={`/s/${slug.city}${slug.filters.cities !== '' ? "?cities=" + slug.filters.cities : ''}`}>
                             <h1 className='text-2xl font-bold text-pink-600 cursor-pointer'>
                                 دیــــوار
-
-
                             </h1>
-
                         </NavLink>
-
                     </div>
-                    <p>
-                        |
+                    <p className="border-r-2 px-3">
+
                         حساب کاربری
                     </p>
                 </div>
@@ -49,16 +44,25 @@ const DashboardLayout = (props) => {
                 <div>
                     <Menu>
                         <MenuHandler>
-                            <Button color='indigo' className="flex justify-center items-center gap-3 rounded-full p-3 border-2 border-indigo-300">
+                            <Button color='indigo' size="sm" className="flex justify-center items-center gap-3 rounded-full p-2 border-2 border-indigo-300">
 
-                                <FiUser className="text-2xl font-bold text-white" />
+                                <FiUser className="text-xl font-bold text-white" />
                             </Button>
                         </MenuHandler>
                         <MenuList>
-                            <MenuItem>حساب کاربری</MenuItem>
-                            <MenuItem>درج آگهی</MenuItem>
+                            <MenuItem>
+                                <Link to={'/dashboard'}>
+                                    حساب کاربری
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link to={'/new'}>
+                                    درج آگهی
+                                </Link>
+
+                            </MenuItem>
                             <hr className="my-3" />
-                            <MenuItem>خروج</MenuItem>
+                            <MenuItem onClick={props.signOut}>خروج</MenuItem>
                         </MenuList>
                     </Menu>
                 </div>

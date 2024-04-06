@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import BottomNav from "../Navbar/BottomNav";
 import CustomStyle from "../../assets/css/custom"
+
 const Layout = (props) => {
  
     return (
