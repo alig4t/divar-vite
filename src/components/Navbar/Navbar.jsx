@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useCallback, useMemo } from 'react';
 import { useState } from 'react'
 
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FiAlignJustify, FiMapPin, FiSearch, FiUser, FiMessageSquare, FiTag } from "react-icons/fi";
 
 import {
@@ -16,17 +16,35 @@ import SideDrawer from '../Sidebar/SideDrawer';
 const Navbar = () => {
 
     const [cityModalOpen, setCityModalOpen] = useState(false)
-    
-    const showCityModalHandler = () =>  {
+
+    const navigate = useNavigate()
+
+
+    const showCityModalHandler = () => {
         setCityModalOpen(true)
     }
 
-    const closeCityModalHandler = useCallback(() =>  {
+    const closeCityModalHandler = useCallback(() => {
         setCityModalOpen(false)
-    },[])
+    }, [])
 
     const { titleForNav, slug } = useStateContext()
 
+    const searchHandler = (e) => {
+        e.preventDefault()
+        let fil = ''
+        let url = ''
+        if (slug.filters.cities === '') {
+            fil = 'q=' + inputSearch   
+        } else {
+            fil = 'cities=' + slug.filters.cities + '&q=' + inputSearch
+        }
+        url = `/s/${slug.city}?${fil}`        
+        console.log(url);
+        navigate(url)
+    }
+
+    const [inputSearch, setInputSearch] = useState("")
 
     const [openSide, setOpenSide] = useState(false);
 
@@ -61,7 +79,12 @@ const Navbar = () => {
 
                     <div className='max-w-full relative flex-1' >
                         <FiSearch className='absolute right-2.5 text-gray-700 m-auto top-0 bottom-0' />
-                        <input className='w-full lg:max-w-96 border-2 outline-none rounded-md bg-gray-50 border-gray-100 focus:border-gray-200 focus:bg-white p-1.5 pr-8 pl-3 text-12 text-blue-gray-900' placeholder='جستجو در همه آگهی ها' />
+                        <form onSubmit={searchHandler}>
+                            <input className='w-full lg:max-w-96 border-2 outline-none rounded-md bg-gray-50 border-gray-100 focus:border-gray-200 focus:bg-white p-1.5 pr-8 pl-3 text-12 text-blue-gray-900' placeholder='جستجو در همه آگهی ها'
+                                value={inputSearch}
+                                onChange={(e) => setInputSearch(e.target.value)}
+                            />
+                        </form>
                     </div>
                 </div>
 

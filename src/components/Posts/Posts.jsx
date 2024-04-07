@@ -16,7 +16,7 @@ import { showDate } from '../../helper/Helper';
 const Posts = () => {
 
     const now = new Date()
-    
+
     const [queryStirng] = useSearchParams();
     const { currentCat } = useStateContext()
     const [loading, setLoading] = useState(false)
@@ -32,12 +32,17 @@ const Posts = () => {
     }, [queryStirng, currentCat]);
 
     async function getPosts() {
-        console.log("get posts");
         setLoading(true)
-        const { data, error } = await supabase.from("posts")
-        .select()
-        .order('created_at',{ascending:false})
-        setTimeout(() => {
+        console.log("get posts");
+
+        let inSearchModa = queryStirng.has('q')
+
+
+        if (inSearchModa) {
+            const { data, error } = await supabase.from("posts")
+                .select()
+                .like('title', `%${queryStirng.get('q')}%`)
+                .order('created_at', { ascending: false })
             if (!error) {
                 setPosts(data);
                 setLoading(false)
@@ -47,7 +52,32 @@ const Posts = () => {
                 setError(error)
                 setLoading(false)
             }
-        }, 500);
+        } else {
+            const { data, error } = await supabase.from("posts")
+                .select()
+                .order('created_at', { ascending: false })
+            if (!error) {
+                setPosts(data);
+                setLoading(false)
+                setError(null)
+                window.scrollBy({ top: -20, behavior: "smooth" })
+            } else {
+                setError(error)
+                setLoading(false)
+            }
+        }
+
+        // setTimeout(() => {
+        //     if (!error) {
+        //         setPosts(data);
+        //         setLoading(false)
+        //         setError(null)
+        //         window.scrollBy({ top: -20, behavior: "smooth" })
+        //     } else {
+        //         setError(error)
+        //         setLoading(false)
+        //     }
+        // }, 500);
     }
 
 
@@ -106,10 +136,10 @@ const Posts = () => {
                                                                 <p className="line-clamp-1">
 
                                                                     {
-                                                                        item.postDetail.status ? item.postDetail.status.type === 'number'?
-                                                                        Number(item.postDetail.status.value).toLocaleString() + " " + item.postDetail.status.unit
-                                                                        : item.postDetail.status.value
-                                                                        :null
+                                                                        item.postDetail.status ? item.postDetail.status.type === 'number' ?
+                                                                            Number(item.postDetail.status.value).toLocaleString() + " " + item.postDetail.status.unit
+                                                                            : item.postDetail.status.value
+                                                                            : null
                                                                     }
                                                                 </p>
                                                                 <p className="line-clamp-1">
@@ -118,14 +148,14 @@ const Posts = () => {
 
                                                                 </p>
                                                                 <p className="line-clamp-1">
-                                                                    
+
                                                                     {showDate(item.created_at) + " در "}  {item.location?.mahal}
-                                                                    
-                                                                    </p>
+
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div className="flex-shrink-0 self-center bg-blue-gray-50 rounded-md">
-                                                            <img src={item.images? item.images[0] : ''}
+                                                            <img src={item.images ? item.images[0] : ''}
                                                                 className="w-32 h-32 rounded-md object-cover"
                                                             />
                                                         </div>
@@ -136,6 +166,17 @@ const Posts = () => {
                                     )
                                 })
                         }
+                        {posts.length === 0 ? (
+                            <div className='w-full col-span-2 h-screen text-center mt-12'>
+                                <h6 className=' font-bold'>آگهی ای در این زمینه وجود ندارد</h6>
+                                <Link to='/'>
+
+                                    <Button variant='outlined' size='sm' color='pink' className='my-3'
+                                        onClick={getPosts}
+                                    >صفحه اصلی</Button>
+                                </Link>
+                            </div>
+                        ) : null}
                     </>
                 )}
 

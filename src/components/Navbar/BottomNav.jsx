@@ -1,4 +1,4 @@
-import { FiAlignJustify } from "react-icons/fi";
+import { FiAlignJustify, FiUser } from "react-icons/fi";
 import { FiUserPlus } from "react-icons/fi";
 import { FiPocket } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
@@ -33,8 +33,8 @@ const BottomNav = () => {
 
                 
                 <Link to={'/dashboard'} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer [&>*]:hover:text-gray-900">
-                    <FiUserPlus className="w-6 h-6 text-gray-800" />
-                    <p className="text-11 font-bold text-gray-600">حساب کاربری</p>
+                    <FiUser className="w-6 h-6 text-gray-800" />
+                    <p className="text-11 font-bold text-gray-600">حساب‌‌کاربری</p>
                 </Link>
 
 
