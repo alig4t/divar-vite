@@ -10,7 +10,7 @@ import PostSkeleton from "../UI/PostSkeleton";
 import { useEffect, useState } from "react";
 import { useStateContext } from "../../context/SiteContext";
 import { supabase } from '../../config';
-import { showDate } from '../../helper/Helper';
+import { getCatWithAllChildren, showDate } from '../../helper/Helper';
 
 
 const Posts = () => {
@@ -22,6 +22,12 @@ const Posts = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 
+    useEffect(() => {
+        const scrollPosition = window.scrollY
+        return () => {
+            window.scrollTo(0, scrollPosition)
+        }
+    }, [])
 
     console.log("posts");
 
@@ -36,52 +42,41 @@ const Posts = () => {
         console.log("get posts");
 
         let inSearchModa = queryStirng.has('q')
-
+        let catWithChildrenArray = getCatWithAllChildren(currentCat.id, currentCat.slug)
+        console.log(catWithChildrenArray);
 
         if (inSearchModa) {
             const { data, error } = await supabase.from("posts")
                 .select()
                 .like('title', `%${queryStirng.get('q')}%`)
                 .order('created_at', { ascending: false })
-            if (!error) {
-                setPosts(data);
-                setLoading(false)
-                setError(null)
-                window.scrollBy({ top: -20, behavior: "smooth" })
-            } else {
-                setError(error)
-                setLoading(false)
-            }
+                handleResponse(data, error);
         } else {
-            const { data, error } = await supabase.from("posts")
+            let query = supabase
+                .from('posts')
                 .select()
                 .order('created_at', { ascending: false })
-            if (!error) {
-                setPosts(data);
-                setLoading(false)
-                setError(null)
-                window.scrollBy({ top: -20, behavior: "smooth" })
-            } else {
-                setError(error)
-                setLoading(false)
-            }
+            if (catWithChildrenArray.length > 0) { query = query.in('category', catWithChildrenArray) }
+            const { data, error } = await query
+            handleResponse(data, error);
         }
 
-        // setTimeout(() => {
-        //     if (!error) {
-        //         setPosts(data);
-        //         setLoading(false)
-        //         setError(null)
-        //         window.scrollBy({ top: -20, behavior: "smooth" })
-        //     } else {
-        //         setError(error)
-        //         setLoading(false)
-        //     }
-        // }, 500);
     }
 
 
-
+    function handleResponse(data, error) {
+        setTimeout(() => {
+        if (!error) {
+            setPosts(data);
+            setLoading(false);
+            setError(null);
+            window.scrollBy({ top: -20, behavior: "smooth" });
+        } else {
+            setError(error);
+            setLoading(false);
+        }
+         }, 500);
+    }
 
     return (
 

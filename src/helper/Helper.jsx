@@ -181,7 +181,7 @@ export const showDate = (createTime) => {
             str = Math.floor(hour / 720) + " ماه پیش "
             break;
     }
-    
+
     return str
 }
 
@@ -196,9 +196,34 @@ export function makeCodePost(length = 8) {
     let counter = 0;
     result += onlyChars.charAt(Math.floor(Math.random() * onlyCharsLength));
     while (counter < length - 1) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-      counter += 1;
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
     }
     // console.log(result);
     return result;
+}
+
+export function getCatWithAllChildren(id, slug) {
+
+    if (slug === ''){
+        return []
+    }
+    let allSlug = [slug]
+    let children = CatList.filter(item => item.parent === id)
+    let children2 = []
+    let children3 = []
+    children.forEach((child) => {
+        allSlug.push(child.slug)
+        children2 = CatList.filter(item => item.parent === child.id)
+        children2.forEach((child2) => {
+            allSlug.push(child2.slug)
+
+            children3 = CatList.filter(item => item.parent === child2.id)
+            children3.forEach((child3) => {
+                allSlug.push(child3.slug)
+            })
+        })
+    })
+    // console.log(allSlug);
+    return allSlug
 }

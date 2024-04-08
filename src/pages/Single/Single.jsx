@@ -31,8 +31,6 @@ const Single = () => {
     }
 
 
-
-
     useEffect(() => {
         getPost()
     }, [])

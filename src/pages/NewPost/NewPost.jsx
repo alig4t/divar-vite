@@ -13,7 +13,7 @@ import Provinces from "../../components/CityModal/provinces.json"
 import CityList from "../../components/CityModal/cities.json"
 import AllFilters from "../../JsonFiles/AllFilters.json"
 
-import { FiChevronLeft } from 'react-icons/fi';
+import { FiChevronLeft, FiUploadCloud } from 'react-icons/fi';
 import { Button, Input, Option, Select, Textarea } from '@material-tailwind/react';
 
 import NewPostLayout from '../../components/Layout/NewPostLayout';
@@ -79,6 +79,8 @@ const NewPost = (props) => {
 
     const [form, setForm] = useState([])
 
+    console.log(form);
+
     const navigate = useNavigate()
     const [inserting, setInserting] = useState(false)
 
@@ -97,7 +99,6 @@ const NewPost = (props) => {
 
     const [errorForm, setErrorForm] = useState({})
 
-    // console.log(provinceInput);
     useEffect(() => {
         let parentSlug = catSlug ? catSlug : ''
         let list = {}
@@ -152,8 +153,9 @@ const NewPost = (props) => {
     }
 
     const proHandler = (e) => {
+        console.log(e);
         setProvinceOptions(e)
-        let getCities = CityList.filter((item) => item.province_id === Number(e.id))
+        let getCities = CityList.filter((item) => item.province_id === Number(e))
         setCityOptions(getCities)
     }
     const cityHandler = (e) => {
@@ -177,7 +179,6 @@ const NewPost = (props) => {
         } else {
             // Handle success
         }
-        console.log(data, error);
         return ("https://qbaacnllyoyhtndgcvvs.supabase.co/storage/v1/object/public/" + data.fullPath)
     }
 
@@ -212,7 +213,6 @@ const NewPost = (props) => {
             images.push(uploadFile(item));
         })
         const results = await Promise.all(images);
-        console.log(results);
 
         let code = makeCodePost()
         let location = {
@@ -239,14 +239,12 @@ const NewPost = (props) => {
             }
         })
 
-        console.log({ code, title, category: catSlug, postDetail, description: desc, location })
         const { data, error } = await supabase
             .from('posts')
             .insert([
-                { code, images: results, title, category: catSlug, postDetail, description: desc, location ,author:props.user.id },
+                { code, images: results, title, category: catSlug, postDetail, description: desc, location, author: props.user.id },
             ])
             .select()
-        console.log(data, error);
         if (error === null) {
             navigate('/')
         }
@@ -267,7 +265,6 @@ const NewPost = (props) => {
             })));
         }
     });
-    console.log(files);
 
     const thumbs = files.map(file => (
         <div style={thumb} key={file.name}>
@@ -305,7 +302,7 @@ const NewPost = (props) => {
                 <div className='mt-5'>
                     {cat ? (
                         <>
-                            <div className='border-2 border-gray-200 p-6 rounded-md flex items-center justify-between'>
+                            <div key={1} className='border-2 border-gray-200 p-6 rounded-md flex items-center justify-between'>
                                 <span className='font-bold'>
                                     {cat.title}
                                 </span>
@@ -316,7 +313,7 @@ const NewPost = (props) => {
 
                             </div>
 
-                            <div className='my-6 flex flex-col gap-5'>
+                            <div key={2} className='my-6 flex flex-col gap-5'>
 
                                 <div className='flex gap-2 '>
                                     <Select size='lg' color="teal" label="انتخاب استان"
@@ -324,7 +321,7 @@ const NewPost = (props) => {
                                         className='min-w-[100px]'
                                     >
                                         {Provinces.map((item) => {
-                                            return <Option value={item}>{item.title}</Option>
+                                            return <Option key={item.id} value={String(item.id)}>{item.title}</Option>
                                         })}
                                     </Select>
                                     <Select size='lg' color='teal' label="انتخاب شهر" disabled={provinceOptions === 0 ? true : false}
@@ -333,7 +330,7 @@ const NewPost = (props) => {
                                         error={errorForm.city && cityVal === "" ? true : false}
                                     >
                                         {cityOptions.map((city) => {
-                                            return <Option value={city.title}>{city.title}</Option>
+                                            return <Option key={city.id} value={city.title}>{city.title}</Option>
                                         })}
                                     </Select>
                                 </div>
@@ -343,7 +340,7 @@ const NewPost = (props) => {
                                     error={errorForm.mahal && mahalVal === "" ? true : false}
                                 >
                                     {mahalOptions.map((mahal) => {
-                                        return <Option value={mahal.title}>{mahal.title}</Option>
+                                        return <Option key={mahal.id} value={mahal.title}>{mahal.title}</Option>
                                     })}
                                 </Select>
 
@@ -353,6 +350,7 @@ const NewPost = (props) => {
                                         case "number":
                                             return <div className="relative flex w-full">
                                                 <Input
+                                                    key={index}
                                                     type="number"
                                                     value={form[index].value}
                                                     label={item.title}
@@ -364,6 +362,7 @@ const NewPost = (props) => {
                                                     error={errorForm.other?.includes(index) ? (item.value === "" ? true : false) : false}
                                                 />
                                                 <Button
+
                                                     size="sm"
                                                     color={true ? "pink" : "blue-gray"}
                                                     variant='text'
@@ -375,22 +374,23 @@ const NewPost = (props) => {
                                             </div>
                                         case "select":
                                             return <Select label={item.title}
+                                                key={index}
                                                 value={form[index].value}
                                                 onChange={(e) => handleFormChange(index, e)}
                                                 error={errorForm.other?.includes(index) ? (item.value === "" ? true : false) : false}
                                             >
-                                                {item.valid.map((opt) => {
-                                                    return <Option value={opt}>{opt}</Option>
+                                                {item.valid.map((opt,index2) => {
+                                                    return <Option key={index2} value={String(opt)}>{opt}</Option>
                                                 })}
                                             </Select>
                                         case "input":
                                             return <div >
-                                                <Input value={form[index].value} onChange={(e) => handleFormChange(index, e.target.value)} name='title' variant="outlined" size='lg' maxLength="70" color='teal' label={item.title} placeholder=""
+                                                <Input key={index} value={form[index].value} onChange={(e) => handleFormChange(index, e.target.value)} name='title' variant="outlined" size='lg' maxLength="70" color='teal' label={item.title} placeholder=""
                                                     error={errorForm.other?.includes(index) ? (item.value === "" ? true : false) : false}
                                                 />
                                             </div>
                                         case "textarea":
-                                            return <Textarea value={form[index].value} variant="outlined" label={item.title}
+                                            return <Textarea key={index} value={form[index].value} variant="outlined" label={item.title}
                                                 onChange={(e) => handleFormChange(index, e.target.value)}
                                                 error={errorForm.other?.includes(index) ? (item.value === "" ? true : false) : false}
                                             />
@@ -414,9 +414,12 @@ const NewPost = (props) => {
                                         <p className='w-full flex flex-col justify-center items-center py-6 px-3 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600
                                         text-gray-600 text-sm font-bold
                                         '>
-                                            <svg class="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+
+                                            {/* <svg className="w-8 h-8 mb-3 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                            </svg>
+                                            </svg> */}
+
+                                            <FiUploadCloud className='w-8 h-8 mb-3 text-gray-600 dark:text-gray-400' />
                                             یک یا چند تصویر را انتخاب نمایید، یا عکس ها را اینجا بکشید و رها کنید
 
                                         </p>
@@ -447,7 +450,7 @@ const NewPost = (props) => {
                             <p className='text-sm my-3'>انتخاب دسته بندی</p>
                             {listShow?.map((item) => {
                                 return (
-                                    <Link to={`/new?slug=${item.slug}`}>
+                                    <Link key={item.id} to={`/new?slug=${item.slug}`}>
                                         <div className='flex justify-between border-b-2 border-gray-100 py-2 cursor-pointer'>
                                             <span>
                                                 {item.title}

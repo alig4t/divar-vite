@@ -9,7 +9,7 @@ import Single from './pages/Single/Single';
 import SelectCity from './pages/SelectCity/SelectCity';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NewPost from './pages/NewPost/NewPost';
-
+import { ScrollRestoration } from "react-router-dom";
 import { ContextProvider } from './context/SiteContext';
 
 function App() {

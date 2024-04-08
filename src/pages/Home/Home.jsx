@@ -76,6 +76,7 @@ const Home = () => {
                 {location.state !== null ? location.state.wrong ? <WrongUrlAlert currentCity={currentCity} currentCat={currentCat} type={location.state.type} /> : "" : ""}
 
             </div>
+        
         </Layout>
     )
 }

@@ -12,7 +12,7 @@ const BottomNav = () => {
     return (
         <>
             <div className="sticky md:hidden bottom-0 bg-gray-200 border-t-2 border-gray-100 flex justify-around 
-            items-center backdrop-blur-sm opacity-95 px-6">
+            items-center backdrop-blur-sm opacity-95 px-2">
 
 
                 <Link to={slug} className="flex flex-col items-center gap-2 hover:bg-white h-full p-2 w-1/5 transition cursor-pointer ">
