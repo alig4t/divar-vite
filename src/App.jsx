@@ -21,6 +21,7 @@ function App() {
           <Route path='/s/:city/:cat?' element={<Home />} />
           <Route path='/v/:code/:title?' element={<Single />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Login />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='*' element={<h1>nothing</h1>} />
         </Routes>

@@ -86,7 +86,9 @@ const SideDrawer = (props) => {
                                     ورود
                                 </Button>
                             </Link>
-                            <Button size="sm">ثبت نام</Button>
+                            <Link to="/signup">
+                                <Button size="sm">ثبت نام</Button>
+                            </Link>
                         </>
                     )}
 
