@@ -1,0 +1,11 @@
+{
+ "name": "App",
+ "icons": [
+  {
+   "src": "/icons8-home-pieces-192.png",
+   "sizes": "192×192",
+   "type": "image/png",
+   "density": "4.0"
+  }
+ ]
+}
