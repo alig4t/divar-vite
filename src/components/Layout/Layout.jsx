@@ -12,7 +12,8 @@ const Layout = (props) => {
             <div className='w-full h-full relative'>
                 <Navbar />
                 {props.children}
-                {props.page === "index" && <BottomNav />}
+
+                {/* {props.page === "index" && <BottomNav />} */}
 
                 <Footer />
             </div>

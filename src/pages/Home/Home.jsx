@@ -12,6 +12,7 @@ import Sidebar from "../../components/Sidebar/Sidebar"
 import Navbar from '../../components/Navbar/Navbar';
 import PostNav from '../../components/Navbar/PostNav';
 import WrongUrlAlert from '../../components/UI/WrongUrlAlert';
+import BottomNav from '../../components/Navbar/BottomNav';
 
 // import { hasGrantedAllScopesGoogle } from '@react-oauth/google';
 
@@ -76,7 +77,8 @@ const Home = () => {
                 {location.state !== null ? location.state.wrong ? <WrongUrlAlert currentCity={currentCity} currentCat={currentCat} type={location.state.type} /> : "" : ""}
 
             </div>
-        
+            <BottomNav />
+
         </Layout>
     )
 }

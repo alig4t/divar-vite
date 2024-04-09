@@ -41,7 +41,7 @@ const Login = () => {
   }, []);
   if (!session) {
     return (
-      <>
+      <div>
       <div className="flex flex-row min-h-screen justify-center items-center p-3 bg-gray-50">
 
         <Card color="transparent" shadow={false} className='shadow-md px-5 py-4 border-t-2 border-pink-500'>
@@ -87,8 +87,8 @@ const Login = () => {
         </Card>
 
       </div>
-            {/* <BottomNav /> */}
-      </>
+            <BottomNav />
+      </div>
 
     );
   } else {
