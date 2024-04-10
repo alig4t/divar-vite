@@ -98,6 +98,8 @@ export const navToLocalCityAndCat = () => {
 export const checkValidCities = (city, hasCities) => {
 
 
+    console.log(hasCities);
+
     let ids = [];
     let validAddress = true;
     let validUrl = true
@@ -105,7 +107,9 @@ export const checkValidCities = (city, hasCities) => {
 
     if (city === "iran") {
         let isRegexValid = regexStr.test(String(hasCities))
-        if (hasCities.length > 0 && isRegexValid) {
+        console.log(isRegexValid);
+        
+        if (hasCities && isRegexValid) {
             let citiesIdsString = hasCities;
             let citiesIdsArray = citiesIdsString.split(",");
             citiesIdsArray.forEach(id => {

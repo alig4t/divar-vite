@@ -30,7 +30,7 @@ const WrongUrlAlert = (props) => {
 
     console.log(props);
 
- 
+
     function getStringAlert() {
         if (props.type === 'cat') {
             if (props.currentCat.title) {
@@ -53,23 +53,25 @@ const WrongUrlAlert = (props) => {
     return (
         <>
             {open && (
-                <div className="fixed bottom-14 m-auto right-0 left-0 flex justify-center items-center z-40">
+                 
+                 <div className="fixed bottom-14 m-auto right-0 left-0 flex justify-center items-center z-40">
 
-                    <div className="rounded-md w-[75%] max-w-[480px] bg-gray-800 text-white flex justify-between items-center p-2 px-5 gap-4"
+                    <div className="rounded-md w-[85%] max-w-[560px] bg-gray-900 text-white flex justify-between items-center p-4 px-5 gap-4 opacity-95"
                     >
-                        <p className="text-xs justify-start md:text-sm leading-6">
+                        <p className="text-xs justify-start md:text-sm leading-5 font-thin">
                             لینک شما مشکل داشت شما  آگهی های
                             {" " + msgStr + " "}
                             را میبینید.
 
+                           
                         </p>
-                        <span className="cursor-pointer text-xl font-bold opacity-50 hover:opacity-100 w-9 h-9 flex items-center justify-center"
+                        <span className="cursor-pointer text-xl font-bold opacity-50 hover:opacity-100 w-9 h-5 flex items-center justify-center"
                             onClick={() => setOpen(false)}>
                             <FiX />
                         </span>
                     </div>
 
-                </div >
+                 </div >
             )}
         </>
     )

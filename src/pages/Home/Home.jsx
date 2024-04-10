@@ -52,8 +52,10 @@ const Home = () => {
         if (catSlug !== currentCat.slug) {
             [ValidCat, catObj] = checkValidCat(cat)
             if (ValidCat) {
+                console.log(catObj);
                 setCatHandler(catObj)
             } else {
+                console.log(ValidCat);
                 let url = navToLocalCityAndCat()
                 navigate(url, { state: { wrong: true, type: "cat" } })
             }

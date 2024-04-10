@@ -52,7 +52,7 @@ export const ContextProvider = ({ children }) => {
     const setCityHandler = (ids, citiesList) => {
         let idsStr = (ids.sort()).join("");
         localStorage.setItem("lastCities", ids.join("%2C"))
-       
+
         setCurrentCity({
             idsStr,
             idsArray: ids,
@@ -60,8 +60,24 @@ export const ContextProvider = ({ children }) => {
         })
     }
 
+    const resetCat = () => {
+        localStorage.setItem("catSlug", '')
+        setCurrentCat({ slug: '', filters: [...DefaultFilters, ...DefaultFilters2] })
+    }
+
     const setCatHandler = cat => {
-        if (cat !== undefined) {
+        // if(cat === undefined || )
+        console.log(Object.keys(cat).length);
+
+        if (Object.keys(cat).length === 0 || cat === undefined) {
+
+            localStorage.setItem("catSlug", '')
+            setCurrentCat({ slug: '', filters: [...DefaultFilters, ...DefaultFilters2] })
+
+        } else {
+
+
+
             let catFilters = { filter: [{}] }
             if (cat.slug !== '') {
 
@@ -77,6 +93,7 @@ export const ContextProvider = ({ children }) => {
 
             localStorage.setItem("catSlug", cat.slug)
             setCurrentCat({ ...cat, filters: [...DefaultFilters, ...catFilters.filter, ...DefaultFilters2] })
+
         }
 
     }
