@@ -50,7 +50,7 @@ const Posts = () => {
                 .select()
                 .like('title', `%${queryStirng.get('q')}%`)
                 .order('created_at', { ascending: false })
-                handleResponse(data, error);
+            handleResponse(data, error);
         } else {
             let query = supabase
                 .from('posts')
@@ -66,16 +66,16 @@ const Posts = () => {
 
     function handleResponse(data, error) {
         setTimeout(() => {
-        if (!error) {
-            setPosts(data);
-            setLoading(false);
-            setError(null);
-            window.scrollBy({ top: -20, behavior: "smooth" });
-        } else {
-            setError(error);
-            setLoading(false);
-        }
-         }, 500);
+            if (!error) {
+                setPosts(data);
+                setLoading(false);
+                setError(null);
+                window.scrollBy({ top: -20, behavior: "smooth" });
+            } else {
+                setError(error);
+                setLoading(false);
+            }
+        }, 500);
     }
 
     return (
@@ -137,11 +137,22 @@ const Posts = () => {
                                                                             : null
                                                                     }
                                                                 </p>
-                                                                <p className="line-clamp-1">
-                                                                    {Number(item.postDetail?.price[0]?.value).toLocaleString() + " " + "تومان"}
+
+                                                                {
+                                                                    item.postDetail?.price.map((pr) => {
+                                                                        if (item.postDetail?.price.length > 1) {
+                                                                            return <p className="line-clamp-1"> {pr.title}  :  {Number(pr.value).toLocaleString()} تومان
+                                                                            </p>
+                                                                        }else{
+                                                                            return <p className="line-clamp-1"> {Number(pr.value).toLocaleString()} تومان
+                                                                            </p>
+                                                                        }
+
+                                                                    })
+                                                                }
+                                                                {/* {Number(item.postDetail?.price[0]?.value).toLocaleString() + " " + "تومان"} */}
 
 
-                                                                </p>
                                                                 <p className="line-clamp-1">
 
                                                                     {showDate(item.created_at) + " در "}  {item.location?.mahal}
