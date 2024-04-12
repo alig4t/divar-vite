@@ -32,6 +32,7 @@ const Navbar = () => {
 
     const searchHandler = (e) => {
         e.preventDefault()
+        if(inputSearch.length < 2) return 0
         let fil = ''
         let url = ''
         if (slug.filters.cities === '') {

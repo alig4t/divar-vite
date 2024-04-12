@@ -11,7 +11,8 @@ import {
 } from "@material-tailwind/react";
 import FilterSection from '../Filters/FilterSection';
 import Categories from '../Sidebar/Categories';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useStateContext } from '../../context/SiteContext';
 
 
 const PostNav = () => {
@@ -26,6 +27,8 @@ const PostNav = () => {
         }
     })
  
+    const { slug } = useStateContext()
+
     const handleFilterDrawer = () => {
         setFilterDrawer({ open: false, mode: "cat" })
     }
@@ -92,9 +95,11 @@ const PostNav = () => {
                     {filterDrawer.mode === "cat" ? <Categories /> : (
                         <>
                             <div className='flex justify-end mb-2'>
-                                <span className=' text-pink-600 text-12 font-bold border-2 rounded-full border-pink-600
+                                <Link
+                                to={`/s/${slug.city}${slug.filters.cities !== '' ? "?cities=" + slug.filters.cities : ''}`}
+                                className=' text-pink-600 text-12 font-bold border-2 rounded-full border-pink-600
                         hover:bg-pink-500 hover:text-white transition cursor-pointer py-1.5 px-3 
-                        '>حذف فیلتر ها</span>
+                        '>حذف فیلتر ها</Link>
                             </div>
                             <FilterSection />
                         </>

@@ -4,20 +4,17 @@ import {
     Drawer,
     Button,
     Typography,
-    IconButton,
-    List,
-    ListItem,
+    IconButton
 } from "@material-tailwind/react";
 
 import Categories from "./Categories";
 import { supabase } from "../../config";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SideDrawer = (props) => {
 
     console.log("drwaer");
     const [userLogin, setUserLogin] = useState(null)
-    // const navigate = useNavigate()
     async function getUserInfo() {
         const { data: { user } } = await supabase.auth.getUser()
         setUserLogin(user)
