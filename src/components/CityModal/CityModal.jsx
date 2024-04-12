@@ -24,13 +24,9 @@ const CityModal = (props) => {
 
     const { currentCity } = useStateContext()
 
-    console.log("city Modal");
-
     const [provinceList] = useState([...provinces])
     const [cityList, setCityList] = useState([])
     const [selectedCities, setSelectedCities] = useState({ list: [], ids: [] })
-
-    // console.log(selectedCities.ids);
 
     const navigate = useNavigate()
     const getCities = (parent) => {
@@ -126,8 +122,6 @@ const CityModal = (props) => {
         // console.log(filtersString);
         urlArray = urlArray.filter((seg) => seg !== '')
         urlArray = urlArray.join('/')
-
-        console.log(urlArray + filtersString);
 
         // alert(urlArray + filtersString)
         props.close()

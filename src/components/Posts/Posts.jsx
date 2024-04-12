@@ -29,7 +29,6 @@ const Posts = () => {
         }
     }, [])
 
-    console.log("posts");
 
     const [posts, setPosts] = useState([]);
 
@@ -39,11 +38,9 @@ const Posts = () => {
 
     async function getPosts() {
         setLoading(true)
-        console.log("get posts");
 
         let inSearchModa = queryStirng.has('q')
         let catWithChildrenArray = getCatWithAllChildren(currentCat.id, currentCat.slug)
-        console.log(catWithChildrenArray);
 
         if (inSearchModa) {
             const { data, error } = await supabase.from("posts")

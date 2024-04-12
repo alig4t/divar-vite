@@ -40,7 +40,6 @@ const Navbar = () => {
             fil = 'cities=' + slug.filters.cities + '&q=' + inputSearch
         }
         url = `/s/${slug.city}?${fil}`        
-        console.log(url);
         navigate(url)
     }
 
