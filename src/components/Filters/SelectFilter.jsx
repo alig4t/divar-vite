@@ -1,81 +1,72 @@
+import { memo, useCallback, useEffect, useState } from "react";
 import { Option, Select } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 import { useSearchParams } from "react-router-dom";
 
+const SelectFilter = memo(({ title, slug, suggestList, selectPlaceHolder }) => {
+  const [queryString, setQueryString] = useSearchParams();
+  const filterParam = queryString.get(slug);
+  const [selected, setSelected] = useState(null);
 
-const SelectFilter = (props) => {
+  const selectHandler = useCallback((item) => {
+    setQueryString(params => {
+      params.set(slug, item);
+      return params;
+    });
+  }, [slug, setQueryString]);
 
+  const clearHandler = useCallback(() => {
+    setSelected(null);
+    setQueryString(params => {
+      params.delete(slug);
+      return params;
+    });
+  }, [slug, setQueryString]);
 
-    const [queryStirng, setQueryStirng] = useSearchParams();
-    const filterParam = queryStirng.get(props.slug)
-
-    const [selected, setSelected] = useState(null)
-
-
-    const selectHandler = (item) => {
-        console.log(item);
-        urlMakerWithSelectTypeFilter(props.slug, item)
-        // setSelected(item)
+  useEffect(() => {
+    if (queryString.has(slug)) {
+      const val = queryString.get(slug);
+      const inSuggestArray = suggestList.find(item => item.value === val);
+      
+      if (inSuggestArray) {
+        setSelected(inSuggestArray.value);
+      } else {
+        setSelected(null);
+      }
+    } else {
+      setSelected(null);
     }
+  }, [filterParam, slug, suggestList]);
 
-    const urlMakerWithSelectTypeFilter = (slug, value) => {
-        console.log(value);
-        setQueryStirng(params => {
-            params.set(slug, value)
-            return params
-        })
-    }
+  return (
+    <div className="w-full p-2 border-t-2 border-gray-100 py-4">
+      <h6 className="mb-4 text-16 font-bold text-pink-500 px-2">{title}</h6>
+      
+      <div className="relative py-2">
+        <Select 
+          label={selectPlaceHolder || title} 
+          value={selected} 
+          onChange={selectHandler} 
+          color="pink"
+        >
+          {suggestList.map((item, index) => (
+            <Option value={item.value} key={index}>
+              {item.title}
+            </Option>
+          ))}
+        </Select>
 
-    const urlMakerSelectTypeClear = () => {
-        setSelected(null)
-        setQueryStirng(params => {
-            params.delete(props.slug)
-            return params
-        })
-    }
+        {selected && (
+          <FiX 
+            className="absolute cursor-pointer right-[6px] top-0 bottom-0 m-auto z-50" 
+            onClick={clearHandler} 
+          />
+        )}
+      </div>
+    </div>
+  );
+});
 
- 
-    useEffect(() => {
-
-        if (queryStirng.has(props.slug)) {
-            let val = queryStirng.get(props.slug)
-            console.log(val);
-            let inSuggestArray = props.suggestList.filter(item => item.value === val)
-            console.log(inSuggestArray);
-            if (inSuggestArray.length === 1) {
-                setSelected(inSuggestArray[0].value)
-            }
-        } else {
-            setSelected(null)
-        }
-    }, [filterParam])
-
-  
-
-    return (
-        <div className="w-full p-2  border-t-2 border-gray-100 py-4">
-
-            <h6 className="mb-4 text-16 font-bold text-pink-500 px-2">{props.title}</h6>
-            <div className="relative py-2">
-
-                <Select label="سن بنا" value={selected} onChange={(e) => selectHandler(e)} name="selectFilter" color="pink" placeholder={"selectFilter"}  >
-                    {props.suggestList.map((item,index) => (
-                        <Option value={item.value} key={index}>
-                            {item.title}
-                        </Option>
-                    ))}
-                </Select>
-
-                <FiX className={`absolute ${selected === null ? "hidden" : ""} cursor-pointer right-[6px] top-0 bottom-0 m-auto z-50`} onClick={urlMakerSelectTypeClear} />
-
-
-
-
-
-            </div>
-        </div>
-    );
-}
+SelectFilter.displayName = 'SelectFilter';
 
 export default SelectFilter;

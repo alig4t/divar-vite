@@ -1,6 +1,5 @@
 
-import React, { useContext, useEffect, useCallback, useMemo } from 'react';
-import { useState } from 'react'
+import { useState, useCallback, memo } from 'react';
 
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FiAlignJustify, FiMapPin, FiSearch, FiUser, FiMessageSquare, FiTag } from "react-icons/fi";
@@ -158,4 +157,4 @@ const Navbar = () => {
     );
 }
 
-export default React.memo(Navbar);
+export default memo(Navbar);

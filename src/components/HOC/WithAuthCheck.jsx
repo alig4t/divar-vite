@@ -1,49 +1,45 @@
 
 
-import React from 'react';
-import { useEffect } from 'react';
-import { supabase } from '../../config';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import apiService from '../../services/api';
 
 const WithAuthCheck = (WrappedComponent) => {
+  return (props) => {
+    const navigate = useNavigate();
+    const [userLogin, setUserLogin] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    // const navigate= useNavigate()
-    // const [userLogin, setUserLogin] = useState(null)
-    // async function getUserInfo() {
-    //     const { data: { user } } = await supabase.auth.getUser()
-    //     console.log(user)
-    //     if (user === null) {
-    //         navigate('/login', { replace: true })
-    //     } else {
-    //         setUserLogin(user)
-    //     }
-    // }
-    // useEffect(() => {
-    //     getUserInfo()
-    // }, [])
-
-    return () => {
-        const navigate= useNavigate()
-        const [userLogin, setUserLogin] = useState(null)
-        console.log("hoc");
-        async function getUserInfo() {
-            const { data: { user } } = await supabase.auth.getUser()
-            console.log(user)
-            if(user === null){
-
-                navigate('/login', { replace: true })
-            }else{
-                setUserLogin(user)
-            }
+    useEffect(() => {
+      async function checkAuth() {
+        try {
+          const session = apiService.getSession();
+          if (!session) {
+            navigate('/login', { replace: true });
+          } else {
+            setUserLogin(session.user);
+          }
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          navigate('/login', { replace: true });
+        } finally {
+          setLoading(false);
         }
-        useEffect(() => {
-            getUserInfo()
-        }, [])
+      }
 
-        return userLogin && <WrappedComponent user={userLogin} />
+      checkAuth();
+    }, [navigate]);
 
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-pink-500"></div>
+        </div>
+      );
     }
-}
+
+    return userLogin ? <WrappedComponent {...props} user={userLogin} /> : null;
+  };
+};
 
 export default WithAuthCheck;

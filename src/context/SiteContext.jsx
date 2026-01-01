@@ -66,14 +66,9 @@ export const ContextProvider = ({ children }) => {
     }
 
     const setCatHandler = cat => {
-        // if(cat === undefined || )
-        console.log(Object.keys(cat).length);
-
         if (Object.keys(cat).length === 0 || cat === undefined) {
-
             localStorage.setItem("catSlug", '')
             setCurrentCat({ slug: '', filters: [...DefaultFilters, ...DefaultFilters2] })
-
         } else {
 
 

@@ -1,64 +1,63 @@
 
+import { memo, useCallback, useEffect, useState } from 'react';
 import { Switch } from '@material-tailwind/react';
-import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-const SwitchFilter = (props) => {
+const SwitchFilter = memo(({ title, itemsList }) => {
+  const [queryString, setQueryString] = useSearchParams();
+  const [switchChecked, setSwitchChecked] = useState([]);
 
-    const [queryStirng, setQueryStirng] = useSearchParams();
+  const urlMakerWithStatus = useCallback((slug) => {
+    setQueryString(params => {
+      if (params.has(slug)) {
+        const state = params.get(slug);
+        if (state === 'true') {
+          params.delete(slug);
+        } else {
+          params.set(slug, 'true');
+        }
+      } else {
+        params.set(slug, 'true');
+      }
+      return params;
+    });
+  }, [setQueryString]);
 
-    const [switchChecked,setSwitchChecked] = useState([])
+  const checkHandler = useCallback((slug) => {
+    urlMakerWithStatus(slug);
+  }, [urlMakerWithStatus]);
 
-    const urlMakerWithStatus = (slug) => {
-        setQueryStirng(params => {
-            if (params.has(slug)) {
-                let state = params.get(slug);
-                params.set(slug, !state)
-                if (state == 'true') {
-                    params.delete(slug)
-                    return params
-                }
-            }
-            params.set(slug, true)
-            return params
-        })
-    }
+  useEffect(() => {
+    const switchObject = [];
 
-    const checkHandler = slug => {
-        // console.log(slug);
-        urlMakerWithStatus(slug)
-    }
+    itemsList.forEach(element => {
+      if (queryString.has(element.slug) && queryString.get(element.slug) === "true") {
+        switchObject.push(element.slug);
+      }
+    });
 
-    useEffect(() => {
-        let switchObject = []
+    setSwitchChecked(switchObject);
+  }, [queryString, itemsList]);
 
-        props.itemsList.forEach(element => {
-            if (queryStirng.has(element.slug) && queryStirng.get(element.slug) === "true") {
-                // console.log(element.slug);
-                switchObject.push(element.slug)
-            }
-        });
+  return (
+    <div className="w-full p-2 border-t-2 border-gray-100 py-4">
+      <h6 className="mb-4 text-16 font-bold text-pink-500 px-2">{title}</h6>
+      
+      <div className='flex flex-col gap-3'>
+        {itemsList.map((item, index) => (
+          <Switch 
+            key={index} 
+            label={item.title} 
+            color='pink' 
+            checked={switchChecked.includes(item.slug)}
+            onChange={() => checkHandler(item.slug)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+});
 
-        // console.log(switchObject);
-        setSwitchChecked(switchObject)
-    }, [queryStirng])
-
-
-
-    return (
-        <>
-            <div className="w-full p-2  border-t-2 border-gray-100 py-4">
-                <h6 className="mb-4 text-16 font-bold text-pink-500 px-2">{props.title}</h6>
-                <div className='flex flex-col gap-3'>
-                    {props.itemsList.map((item, index) => {
-                        return <Switch key={index} label={item.title} color='pink' checked={switchChecked.includes(item.slug) === true ? true:false}
-                        onChange={()=>checkHandler(item.slug)}
-                        />
-                    })}
-                </div>
-            </div>
-        </>
-    );
-}
+SwitchFilter.displayName = 'SwitchFilter';
 
 export default SwitchFilter;

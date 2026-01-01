@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FiChevronLeft } from "react-icons/fi";
 import { IoIosClose } from "react-icons/io";
@@ -48,25 +48,32 @@ const CityModal = (props) => {
     const { currentCat } = useStateContext()
     // let catName = cat != undefined ? cat : ""
     const checkCity = (id, title = "", slug = "") => {
+        setSelectedCities(prevSelected => {
+            const newSelected = {
+                list: [...prevSelected.list],
+                ids: [...prevSelected.ids]
+            };
+            
+            const index = newSelected.ids.findIndex(item => item === id);
 
-        let checkedCities = { ...selectedCities }
-        let index = checkedCities.ids.findIndex(item => item === id)
+            if (index > -1) {
+                // Remove from selection
+                newSelected.ids.splice(index, 1);
+                const objIndex = newSelected.list.findIndex(city => city.id === id);
+                newSelected.list.splice(objIndex, 1);
+            } else {
+                // Add to selection
+                newSelected.ids.push(id);
+                const newObj = { id, title, slug };
+                newSelected.list.push(newObj);
+            }
 
-        if (index > -1) {
-            checkedCities.ids.splice(index, 1)
-            let objIndex = checkedCities.list.findIndex(city => city.id == id)
-            checkedCities.list.splice(objIndex, 1)
-        } else {
-            checkedCities.ids.push(id)
-            let newObj = { id, title, slug }
-            checkedCities.list.push(newObj)
-        }
-
-        setSelectedCities(checkedCities)
+            return newSelected;
+        });
     }
 
     const clearChecked = () => {
-        setSelectedCities({ list: [], ids: [] })
+        setSelectedCities({ list: [], ids: [] });
     }
 
 
@@ -230,7 +237,7 @@ const CityModal = (props) => {
                                 cityList.map((item) => {
                                     return (
 
-                                        <ListItem className="flex py-0 justify-between items-center"
+                                        <ListItem key={item.id} className="flex py-0 justify-between items-center"
                                             onClick={(e) => checkCity(item.id, item.title, item.slug)}
                                         >
                                             <p>{item.title}</p>
@@ -307,7 +314,7 @@ const CityModal = (props) => {
     );
 }
 
-export default React.memo(CityModal);
+export default memo(CityModal);
 
 
 

@@ -96,10 +96,6 @@ export const navToLocalCityAndCat = () => {
 
 
 export const checkValidCities = (city, hasCities) => {
-
-
-    console.log(hasCities);
-
     let ids = [];
     let validAddress = true;
     let validUrl = true
@@ -107,7 +103,6 @@ export const checkValidCities = (city, hasCities) => {
 
     if (city === "iran") {
         let isRegexValid = regexStr.test(String(hasCities))
-        console.log(isRegexValid);
         
         if (hasCities && isRegexValid) {
             let citiesIdsString = hasCities;
@@ -151,10 +146,7 @@ export const getBreadCrumbs = slug => {
     }
     bread.push(catObj)
 
-    console.log(bread);
-
     return bread.reverse()
-
 }
 
 const now = new Date()

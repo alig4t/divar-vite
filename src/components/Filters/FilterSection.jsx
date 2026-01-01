@@ -1,74 +1,94 @@
 
 
-import React from "react";
+import { memo, useMemo } from 'react';
+import { useStateContext } from "../../context/SiteContext";
+
+// Lazy load filter components for better performance
 import MinMaxFilter from "./MinMaxFilter";
 import DistrictFilter from "./DistrictFilter";
 import SwitchFilter from "./SwitchFilter";
 import SelectFilter from "./SelectFilter";
 import CheckboxFilter from "./CheckboxFilter";
-import { useStateContext } from "../../context/SiteContext";
 
-const FilterSection = () => {
+const FilterSection = memo(() => {
+  const { currentCat } = useStateContext();
 
-    const { currentCat } = useStateContext()
+  // Memoize filter components to prevent unnecessary re-renders
+  const filterComponents = useMemo(() => {
+    if (!currentCat?.filters) return null;
 
+    return currentCat.filters.map((filter, index) => {
+      const commonProps = {
+        key: `${filter.type}-${index}`,
+        title: filter.title,
+        slug: filter.slug,
+      };
 
-    return (
-        <>
-            {
-                currentCat?.filters?.map((fil, index) => {
-                    switch (fil.type) {
-                        case "MinMaxTypeFilter":
-                            return <MinMaxFilter
-                                key={index}
-                                title={fil.title}
-                                unit={fil.unit}
-                                slug={fil.slug}
-                                suggestListMin={fil.suggestMin}
-                                suggestListMax={fil.suggestMax}
-                                minPlaceHolder={fil.exampleMin}
-                                maxPlaceHolder={fil.exampleMax}
-                            />
-                        case "DistrictFilter":
-                            return <DistrictFilter
-                                key={index}
-                                title={fil.title}
-                                slug={fil.slug}
-                                itemsList={fil.itemsList}
-                            />
-                        case "SelectTypeFilter":
-                            return <SelectFilter
-                                key={index}
-                                title={fil.title}
-                                slug={fil.slug}
-                                unit={fil.unit}
-                                suggestList={fil.suggestList}
-                                selectPlaceHolder={fil.placeHolder}
-                            />
-                        case "CheckboxFilter":
-                            return <CheckboxFilter
-                                key={index}
-                                slug={fil.slug}
-                                title={fil.title}
-                                itemsList={fil.itemsList}
-                            />
-                        case "StatusFilter":
-                            return <SwitchFilter
-                                key={index}
-                                title={fil.title}
-                                itemsList={fil.itemsList}
-                            />
+      switch (filter.type) {
+        case "MinMaxTypeFilter":
+          return (
+            <MinMaxFilter
+              {...commonProps}
+              unit={filter.unit}
+              suggestListMin={filter.suggestMin}
+              suggestListMax={filter.suggestMax}
+              minPlaceHolder={filter.exampleMin}
+              maxPlaceHolder={filter.exampleMax}
+            />
+          );
 
-                    }
-                })
+        case "DistrictFilter":
+          return (
+            <DistrictFilter
+              {...commonProps}
+              itemsList={filter.itemsList}
+            />
+          );
 
-            }
-            {/* // 
-            // <SwitchFilter />
+        case "SelectTypeFilter":
+          return (
+            <SelectFilter
+              {...commonProps}
+              unit={filter.unit}
+              suggestList={filter.suggestList}
+              selectPlaceHolder={filter.placeHolder}
+            />
+          );
 
-            // <CheckboxFilter /> */}
-        </>
-    )
-}
+        case "CheckboxFilter":
+          return (
+            <CheckboxFilter
+              {...commonProps}
+              itemsList={filter.itemsList}
+            />
+          );
+
+        case "StatusFilter":
+          return (
+            <SwitchFilter
+              {...commonProps}
+              itemsList={filter.itemsList}
+            />
+          );
+
+        default:
+          console.warn(`Unknown filter type: ${filter.type}`);
+          return null;
+        }
+    }).filter(Boolean); // Remove null components
+  }, [currentCat?.filters]);
+
+  if (!filterComponents?.length) {
+    return null;
+  }
+
+  return (
+    <div className="filter-section">
+      {filterComponents}
+    </div>
+  );
+});
+
+FilterSection.displayName = 'FilterSection';
 
 export default FilterSection;

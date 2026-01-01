@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Dialog,
@@ -30,7 +30,7 @@ const DistrictFilter = (props) => {
   }
   const [searchVal, setSearchVal] = useState("")
   const navigate = useNavigate()
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [selectedFilters, setSelectedFilters] = useState({ list: [], ids: [] })
 
@@ -51,51 +51,53 @@ const DistrictFilter = (props) => {
 
 
   useEffect(() => {
-
     if (queryString.has(props.slug)) {
-      let urlValStr = queryString.get(props.slug)
+      let urlValStr = queryString.get(props.slug);
       if (regexDistrict.test(urlValStr)) {
         let checkListArray = [];
         let ids = [];
         let urlValArray = urlValStr.split(',');
+        
         urlValArray.forEach((val) => {
-          let inItemsArray = props.itemsList.filter(item => item.id === parseInt(val))
-          if (inItemsArray.length === 1 && !checkListArray.includes((parseInt(val)))) {
-            checkListArray.push(inItemsArray[0])
-            ids.push(parseInt(inItemsArray[0].id))
+          let inItemsArray = props.itemsList.filter(item => item.id === parseInt(val));
+          if (inItemsArray.length === 1 && !ids.includes(parseInt(val))) {
+            checkListArray.push(inItemsArray[0]);
+            ids.push(parseInt(inItemsArray[0].id));
           }
-        })
+        });
 
-        // setSelectedFilters({ list: checkListArray, ids: ids, initIds: ids })
-
-        setSelectedFilters({ list: checkListArray, ids })
+        setSelectedFilters({ list: checkListArray, ids });
       } else {
-        setSelectedFilters({ list: [], ids: [] })
+        setSelectedFilters({ list: [], ids: [] });
       }
     } else {
-      setSelectedFilters({ list: [], ids: [] })
+      setSelectedFilters({ list: [], ids: [] });
     }
-  }, [filterParam])
+  }, [filterParam, props.slug, props.itemsList]);
 
   const checkHandler = (id, title = "") => {
+    setSelectedFilters(prevSelected => {
+      const newSelected = {
+        list: [...prevSelected.list],
+        ids: [...prevSelected.ids]
+      };
+      
+      const index = newSelected.ids.findIndex(item => item === id);
 
-    let selected = { ...selectedFilters }
-    let index = selected.ids.findIndex(item => item === id)
+      if (index > -1) {
+        // Remove from selection
+        newSelected.ids.splice(index, 1);
+        const objIndex = newSelected.list.findIndex(city => city.id === id);
+        newSelected.list.splice(objIndex, 1);
+      } else {
+        // Add to selection
+        newSelected.ids.push(id);
+        const newObj = { id, title };
+        newSelected.list.push(newObj);
+      }
 
-    if (index > -1) {
-      selected.ids.splice(index, 1)
-      let objIndex = selected.list.findIndex(city => city.id == id)
-      selected.list.splice(objIndex, 1)
-    } else {
-      selected.ids.push(id)
-      let newObj = { id, title }
-      selected.list.push(newObj)
-    }
-
-
-    // { init: [], updated: { list: [], ids: [] } }
-    setSelectedFilters(selected)
-    // setSelectedFilters({ init: [], updated: { list: [], ids: [] } })
+      return newSelected;
+    });
   }
 
   const searchHandler = txt => {
