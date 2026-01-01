@@ -30,7 +30,7 @@ class ApiService {
 
   // Posts API
   async getPosts(filters = {}) {
-    const { page = 1, limit = 40 } = filters;
+    const { page = 1, limit = 42 } = filters;
     const offset = (page - 1) * limit;
     
     // Always fetch all posts first since we need to filter by city/neighborhood

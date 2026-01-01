@@ -20,6 +20,7 @@ const Posts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [totalPosts, setTotalPosts] = useState(0);
+  const [showPosts, setShowPosts] = useState(false);
 
   // Use scroll position hook
   useScrollPosition(`posts-${location.pathname}${location.search}`);
@@ -28,6 +29,7 @@ const Posts = () => {
   useEffect(() => {
     console.log('Filters changed, resetting posts');
     setPosts([]);
+    setShowPosts(false);
     setCurrentPage(1);
     setHasMore(true);
     setError(null);
@@ -39,7 +41,7 @@ const Posts = () => {
     const catWithChildrenArray = getCatWithAllChildren(currentCat.id, currentCat.slug);
 
     // Build filters object
-    const filters = { page, limit: 40 };
+    const filters = { page, limit: 42 };
     
     // Add city filter - use the first city from currentCity
     if (currentCity.citiesList && currentCity.citiesList.length > 0) {
@@ -80,6 +82,9 @@ const Posts = () => {
     }
     setError(null);
 
+    // Record start time for minimum loading duration
+    const startTime = Date.now();
+
     try {
       const filters = buildFilters(page);
       const response = await apiService.getPosts(filters);
@@ -88,8 +93,20 @@ const Posts = () => {
       const newPosts = response.posts || response;
       const pagination = response.pagination;
 
+      // Calculate elapsed time and ensure minimum 1 second loading
+      const elapsedTime = Date.now() - startTime;
+      const minLoadingTime = 1000; // 1 second
+      const remainingTime = Math.max(0, minLoadingTime - elapsedTime);
+
+      // Wait for remaining time if needed
+      if (remainingTime > 0) {
+        await new Promise(resolve => setTimeout(resolve, remainingTime));
+      }
+
       if (reset) {
         setPosts(newPosts);
+        // Trigger fade-in animation after a short delay
+        setTimeout(() => setShowPosts(true), 100);
       } else {
         setPosts(prevPosts => [...prevPosts, ...newPosts]);
       }
@@ -99,7 +116,7 @@ const Posts = () => {
         setTotalPosts(pagination.total);
       } else {
         // Fallback for old format
-        const hasMorePosts = newPosts.length === 40;
+        const hasMorePosts = newPosts.length === 60;
         setHasMore(hasMorePosts);
       }
 
@@ -125,7 +142,7 @@ const Posts = () => {
   };
 
   const renderSkeletons = () => (
-    Array.from({ length: 8 }, (_, index) => <PostSkeleton key={`skeleton-${index}`} />)
+    Array.from({ length: 42 }, (_, index) => <PostSkeleton key={`skeleton-${index}`} />)
   );
 
   const renderPosts = () => {
@@ -162,10 +179,20 @@ const Posts = () => {
     return (
       <>
         {posts.map((item, index) => (
-          <div className="w-full" key={`${item.code}-${index}`}>
+          <div 
+            className={`w-full transition-all duration-500 ease-out ${
+              showPosts 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-4'
+            }`}
+            style={{ 
+              transitionDelay: `${Math.min(index * 50, 800)}ms` // Stagger animation, max 800ms
+            }}
+            key={`${item.code}-${index}`}
+          >
             <Link to={`/v/${item.code}/${item.title.replace(/\s+|\/|\u200C/g, '-').toLowerCase()}`}>
-              <Card className="w-full overflow-hidden cursor-pointer shadow-sm">
-                <div className="w-full h-full flex items-center justify-between p-3 border-2 border-gray-50 hover:border-blue-gray-100 transition">
+              <Card className="w-full overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all duration-300 post-card">
+                <div className="w-full h-full flex items-center justify-between p-3 border-2 border-gray-50 hover:border-blue-gray-100 transition-colors duration-200">
                   <div className="flex-1 min-h-32 overflow-hidden flex flex-col justify-between gap-2 ml-3">
                     <h2 className="text-14 md:text-16 font-bold md:font-extrabold line-clamp-2">
                       {item.title}
@@ -210,8 +237,16 @@ const Posts = () => {
         {/* Loading more indicator */}
         {loadingMore && (
           <>
-            {Array.from({ length: 4 }, (_, index) => (
-              <PostSkeleton key={`loading-${index}`} />
+            {Array.from({ length: 6 }, (_, index) => (
+              <div 
+                key={`loading-${index}`}
+                className="w-full animate-pulse"
+                style={{ 
+                  animationDelay: `${index * 100}ms` 
+                }}
+              >
+                <PostSkeleton />
+              </div>
             ))}
           </>
         )}
@@ -224,7 +259,7 @@ const Posts = () => {
               variant="outlined"
               color="pink"
               size="lg"
-              className="px-8 py-3"
+              className="px-8 py-3 hover:scale-105 transition-transform duration-200 animate-fade-in"
             >
               نمایش آگهی‌های بیشتر
             </Button>

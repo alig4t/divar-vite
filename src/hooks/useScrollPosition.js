@@ -8,6 +8,34 @@ const useScrollPosition = (key) => {
 
   // Load saved positions from sessionStorage on mount
   useEffect(() => {
+    // Check if page was refreshed using multiple methods for better compatibility
+    let isPageRefresh = false;
+    
+    // Method 1: Modern Navigation API
+    const navigationEntries = performance.getEntriesByType('navigation');
+    if (navigationEntries.length > 0) {
+      isPageRefresh = navigationEntries[0].type === 'reload';
+    }
+    
+    // Method 2: Legacy performance.navigation (fallback)
+    if (!isPageRefresh && performance.navigation) {
+      isPageRefresh = performance.navigation.type === 1 || 
+                     performance.navigation.type === performance.navigation.TYPE_RELOAD;
+    }
+    
+    // Method 3: SessionStorage flag (fallback)
+    if (!isPageRefresh) {
+      isPageRefresh = sessionStorage.getItem('pageRefreshed') === 'true';
+    }
+
+    if (isPageRefresh) {
+      // Clear scroll positions on page refresh
+      sessionStorage.removeItem('scrollPositions');
+      sessionStorage.removeItem('pageRefreshed');
+      console.log('Page refreshed - cleared scroll positions');
+      return;
+    }
+
     const saved = sessionStorage.getItem('scrollPositions');
     if (saved) {
       try {
@@ -37,11 +65,18 @@ const useScrollPosition = (key) => {
       saveScrollPosition();
     };
 
+    // Mark page refresh in sessionStorage
+    const handleBeforeUnload = () => {
+      sessionStorage.setItem('pageRefreshed', 'true');
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
     // Save position when leaving the page
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
       saveScrollPosition();
     };
   }, [key]);
