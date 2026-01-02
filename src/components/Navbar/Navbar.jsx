@@ -77,9 +77,9 @@ const Navbar = () => {
                     </Button>
 
                     <div className='max-w-full relative flex-1' >
-                        <FiSearch className='absolute right-2.5 text-gray-700 m-auto top-0 bottom-0' />
+                        <FiSearch className='absolute right-3 text-gray-700 m-auto top-0 bottom-0' />
                         <form onSubmit={searchHandler}>
-                            <input className='w-full lg:max-w-96 border-2 outline-none rounded-md bg-gray-50 border-gray-100 focus:border-gray-200 focus:bg-white p-1.5 pr-8 pl-3 text-12 text-blue-gray-900' placeholder='جستجو در همه آگهی ها'
+                            <input className='w-full lg:max-w-96 border-2 outline-none rounded-md bg-gray-50 border-gray-100 focus:border-gray-200 focus:bg-white p-3 pr-10 pl-4 text-sm text-blue-gray-900 h-11' placeholder='جستجو در همه آگهی ها'
                                 value={inputSearch}
                                 onChange={(e) => setInputSearch(e.target.value)}
                             />

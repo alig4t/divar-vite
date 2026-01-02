@@ -50,6 +50,18 @@ class StaticApiService {
     
     let result = [...(this.data?.posts || [])];
     
+    // Apply search filter first
+    if (filters.search) {
+      const searchTerm = filters.search.toLowerCase();
+      console.log('Static API: Search term:', searchTerm);
+      
+      result = result.filter(post => 
+        post.title?.toLowerCase().includes(searchTerm) ||
+        post.description?.toLowerCase().includes(searchTerm)
+      );
+      console.log('Static API: After search filter:', result.length);
+    }
+    
     // Apply city filter
     if (filters.city) {
       result = result.filter(post => post.location?.city === filters.city);
@@ -137,6 +149,14 @@ class StaticApiService {
   async getPostById(id) {
     await this.delay(200);
     return this.data?.posts?.find(post => post.id === parseInt(id));
+  }
+
+  async getPostByCode(code) {
+    await this.delay(200);
+    console.log('Static API: getPostByCode called with code:', code);
+    const post = this.data?.posts?.find(post => post.code === code);
+    console.log('Static API: Found post:', post ? `${post.id} - ${post.title}` : 'Not found');
+    return post;
   }
 
   async getCategories() {
