@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 
 import Categories from "./Categories";
-import apiService from "../../services/api";
+import apiService from "../../config";
 
 const SideDrawer = (props) => {
     const [userLogin, setUserLogin] = useState(null);

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import apiService from '../../services/api';
+import apiService from '../../config';
 
 const WithAuthCheck = (WrappedComponent) => {
   return (props) => {

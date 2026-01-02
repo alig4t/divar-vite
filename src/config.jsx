@@ -3,11 +3,15 @@
 import localApiService from './services/api';
 import staticApiService from './services/api-static';
 
-// Choose API service based on environment
+// Choose API service based on environment or manual override
 const isProduction = import.meta.env.PROD;
-const apiService = isProduction ? staticApiService : localApiService;
+const useStaticAPI = import.meta.env.VITE_USE_STATIC_API === 'true';
 
-console.log(`Using ${isProduction ? 'static' : 'local'} API service`);
+// Force static API for testing
+const apiService = staticApiService; // Temporarily force static API
+
+console.log(`Using static API service (forced for testing)`);
+console.log('Environment:', { isProduction, useStaticAPI });
 
 // Export the API service for backward compatibility
 export const supabase = {

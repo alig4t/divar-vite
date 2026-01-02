@@ -6,7 +6,7 @@ import { PiNewspaperClippingLight } from "react-icons/pi";
 
 import DashboardLayout from '../../components/Layout/DashboardLayout';
 import WithAuthCheck from '../../components/HOC/WithAuthCheck';
-import apiService from '../../services/api';
+import apiService from '../../config';
 
 const Dashboard = (props) => {
   const [myPosts, setMyPosts] = useState([]);

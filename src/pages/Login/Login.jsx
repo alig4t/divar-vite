@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiUser, FiShield } from 'react-icons/fi';
 
 import BottomNav from '../../components/Navbar/BottomNav';
-import apiService from '../../services/api';
+import apiService from '../../config';
 
 const Login = () => {
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import Breadcrumbs from '../../components/Single/Breadcrumbs';
 import Carousel from '../../components/Single/Carousel';
 import Content from '../../components/Single/Content';
 import StickyTell from '../../components/Single/StickyTell';
-import apiService from '../../services/api';
+import apiService from '../../config';
 
 const Single = () => {
   const { code } = useParams();

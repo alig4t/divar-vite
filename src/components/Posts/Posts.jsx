@@ -6,7 +6,7 @@ import PostSkeleton from "../UI/PostSkeleton";
 import LazyImage from "../UI/LazyImage";
 import { useStateContext } from "../../context/SiteContext";
 import { getCatWithAllChildren, showDate } from '../../helper/Helper';
-import apiService from '../../services/api';
+import apiService from '../../config';
 import useScrollPosition from '../../hooks/useScrollPosition';
 
 const Posts = () => {
@@ -165,7 +165,7 @@ const Posts = () => {
 
     if (posts.length === 0 && !loading) {
       return (
-        <div className='w-full col-span-1 md:col-span-2 h-screen text-center mt-12'>
+        <div className='w-full col-span-full h-screen text-center mt-12'>
           <h6 className='font-bold'>آگهی ای در این زمینه وجود ندارد</h6>
           <Link to='/'>
             <Button variant='outlined' size='sm' color='pink' className='my-3'>

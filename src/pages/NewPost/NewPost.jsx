@@ -11,7 +11,7 @@ import CityList from "../../components/CityModal/cities.json";
 import AllFilters from "../../JsonFiles/AllFilters.json";
 import NewPostLayout from '../../components/Layout/NewPostLayout';
 import { makeCodePost } from '../../helper/Helper';
-import apiService from '../../services/api';
+import apiService from '../../config';
 
 const CatParents = [
   { "id": 14, "slug": "real-estate", "title": "املاک", "parent": 0, "icon": "house-svgrepo-com (3).svg", "hasChildren": true },
