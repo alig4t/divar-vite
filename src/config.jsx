@@ -1,6 +1,13 @@
 
-// API Configuration - Mock Backend
-import apiService from './services/api';
+// API Configuration - Environment-based API selection
+import localApiService from './services/api';
+import staticApiService from './services/api-static';
+
+// Choose API service based on environment
+const isProduction = import.meta.env.PROD;
+const apiService = isProduction ? staticApiService : localApiService;
+
+console.log(`Using ${isProduction ? 'static' : 'local'} API service`);
 
 // Export the API service for backward compatibility
 export const supabase = {

@@ -148,7 +148,7 @@ const Posts = () => {
   const renderPosts = () => {
     if (error) {
       return (
-        <div className='w-full col-span-1 md:col-span-2 h-screen text-center mt-12'>
+        <div className='w-full col-span-full h-screen text-center mt-12'>
           <h6 className='font-bold'>خطا در برقراری ارتباط</h6>
           <Button 
             variant='outlined' 
